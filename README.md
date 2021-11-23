@@ -1,2 +1,2 @@
-# Guilds-v2
-enhanced version of the previous code
+# Guilds-v3
+enhanced version of Guilds-v2
