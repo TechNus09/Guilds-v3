@@ -8,6 +8,12 @@ import random
 from datetime import date as dt
 from urllib.request import Request, urlopen
 import json
+import nest_asyncio
+import time
+import aiohttp
+
+
+nest_asyncio.apply()
 
 ##############################################################################Bot_Resources######################################################################################
 
@@ -86,8 +92,8 @@ guilds_counter_int  = {'IMMORTAL': 0, 'OWO': 0, 'EXP': 0, 'BRX': 0, 'RNG': 0, 'L
                         'EXC': 0, 'PHG': 0, 'SHORN': 0, 'TT': 0, 'UMBRA': 0, 'AK7': 0, 'GG': 0, 'LNH': 0, 'SLP': 0, 'DEAD': 0, 'TCK': 0, 'XP': 0, 
                         'VN': 0, 'XNW': 0, 'DARK': 0, 'FW': 0, 'DAVY': 0, 'DK': 0, 'II': 0, 'RW': 0, 'WG': 0, 'OL': 0, 'GOD': 0, 'YOUNG': 0, 'MAD': 0,
                         'ORDO': 0, 'LGN': 0, 'STEVE': 0, 'LOST': 0, 'LI': 0, 'GO': 0, 'LOLI': 0, 'PKMN': 0, 'GUN': 0, 'TAZ': 0, 'BH': 0, 'YT': 0,
-                        'SYN': 0, 'NINJA': 0, 'ESP': 0, 'DR': 0, 'PK': 0, 'CW': 0, 'XD': 0, 'RS': 0, 'GOLEM': 0, 'IIAMA': 0, 'IL': 0, 'HANSA': 0, 'YAO': 
-                        0, 'ST': 0, '6T9': 0, 'FLO': 0, 'SORRY': 0, 'AEVN': 0, 'MSA': 0, 'TROLL': 0, 'GW': 0, 'AROS': 0, 'GOKU': 0, 'YUZU': 0, 'GEAR': 0, 'IE': 0,
+                        'SYN': 0, 'NINJA': 0, 'ESP': 0, 'DR': 0, 'PK': 0, 'CW': 0, 'XD': 0, 'RS': 0, 'GOLEM': 0, 'IIAMA': 0, 'IL': 0, 'HANSA': 0, 'YAO': 0,
+                        'ST': 0, '6T9': 0, 'FLO': 0, 'SORRY': 0, 'AEVN': 0, 'MSA': 0, 'TROLL': 0, 'GW': 0, 'AROS': 0, 'GOKU': 0, 'YUZU': 0, 'GEAR': 0, 'IE': 0,
                         'WTH': 0, 'ACE': 0, 'RDS': 0, 'ROYAL': 0, 'KH': 0, 'FT': 0, 'TMG': 0, 'IY': 0, 'W3': 0, 'NEW': 0, 'TTT': 0, 'LT': 0, 'PW': 0,
                         'PAPPY': 0, '403': 0, 'KING': 0, 'FOX': 0, 'YSD': 0, 'NN': 0, 'MARIA': 0, 'OLD': 0, 'ROSE': 0, 'JESSA': 0, 'DAZZ': 0, 'SIR': 0,
                         'RP': 0, 'RSM': 0, '  ILY': 0, 'PWN': 0, 'IV': 0, 'VX': 0, 'ROBBY': 0, 'REN': 0, 'SNAKE': 0, 'GOUL': 0, 'FLOS': 0, 'LBX': 0,
@@ -130,52 +136,6 @@ lvldef = [46, 53, 60, 70, 80, 92, 106, 121, 140, 160, 184, 212, 243, 280, 321, 3
 
 
 
-
-
-
-###########Temporal OwO Event#########################################
-def CombatEvent() :
-    total_guild_xp = 0
-    results = []
-    ToZero(players_new)
-    ToZero(players_final)
-    temp_results = {}
-    for k in range(0,1000):  
-        headers = {'User-Agent': 'Mozilla/5.0'}        
-        request = Request('https://www.curseofaros.com/highscores.json?p='+str(k), headers=headers)
-        html = urlopen(request).read()       
-        data = html.decode("utf-8")        
-        fdata = json.loads(data)
-        for i in range(0,20): 
-            #check names get rank
-            player_name = fdata[i]["name"]
-            xp = fdata[i]["xp"]
-            
-            if player_name in players_int :
-                players_new[player_name] = xp
-            else :                
-                continue
-    for key in players_int:
-        players_final[key] = players_new[key]-players_int[key]
-        total_guild_xp += players_final[key]
-
-    temp_results = {k: v for k, v in sorted(players_final.items(), key=lambda item: item[1],reverse=True)}
-    DictToList(temp_results,results)
-    for m in range(len(results)):
-        results[m] = '#'+str(m+1)+' - '+results[m]
-    results.append(total_guild_xp)
-
-    return results
-        
-##########################################################################################################################################################################
-        
-        
-        
-        
-        
-        
-        
-        
 ######################################################################Bot_Funtctions##################################################################################        
         
         
@@ -183,10 +143,10 @@ def CombatEvent() :
 def ToZero(dicc):
     for key in dicc:
         dicc[key]=0  
-  
-  
-  
-  
+    
+    
+    
+    
 def tabfill(xp): 
     if xp>4536153492:
         lvl=120
@@ -230,94 +190,94 @@ def rankk (rank):
     rank_text = "**rank#"+str(rank)+"**"
     return rank_text
 
+def get_tasks(session,skill_name):
+    tasks = []
+    for k in range(0,1000):  
+        url='https://www.curseofaros.com/highscores'
+        tasks.append(asyncio.create_task(session.get(url+skill_name+'.json?p='+str(k))))
+    return tasks
 
 #get guild members rankings in a certain skill (20000)    
-def searchtag(skill_name,guildtag):
+async def searchtag(skill_name,guildtag):
+    start = time.time()
     members_sorted = []
     guildreg_names = {}
     guildreg_ranks = {}
-    
-    for k in range(0,1000):  
-        url='https://www.curseofaros.com/highscores'
-        headers = {'User-Agent': 'Mozilla/5.0'}        
-        request = Request(url+skill_name+'.json?p='+str(k), headers=headers)
-        html = urlopen(request).read()       
-        data = html.decode("utf-8")        
-        fdata = json.loads(data)
-        for i in range(0,20): 
-            #check names get rank
-            player_rank = 20 * k + i + 1
-            player_name = fdata[i]["name"]
-            xp = fdata[i]["xp"]
-            tag = player_name.split()[0]
-            tag = tag.upper()
-            
-            if tag == guildtag.upper():
-                if player_name in guildreg_names :
-                    continue
-                else:
-                    guildreg_names[player_name]=xp
-                    guildreg_ranks[player_name]=player_rank
-                    continue
-        
-        
-    temp_dic = {k: v for k, v in sorted(guildreg_names.items(), key=lambda item: item[1],reverse=True)}
-    
-    members_sorted.clear()
-    for key, value in temp_dic.items():
-        test = key + " -- " + "{:,}".format(value) +"\n [#"+str(guildreg_ranks[key])+"] [Lv."+str(tabfill(value)[0])+" ("+str(tabfill(value)[1])+"%)]"
-        members_sorted.append(test)
-    
-    mini_list = []
-    for i in range(len(members_sorted)):
-        mini_list.append(members_sorted[i])
-    members_sorted.clear()
-    temp_dic = {}
-    return mini_list
-#get guilds members rankings in total xp (20000)
-def searchtagtotal(guildtag):
-    members_sorted = []
-    guildreg = {}
-
-    
-    for m in range(7):
-        for k in range(0,1000):  
-            url='https://www.curseofaros.com/highscores'
-            headers = {'User-Agent': 'Mozilla/5.0'}        
-            request = Request(url+skill[m]+'.json?p='+str(k), headers=headers)
-            html = urlopen(request).read()       
-            data = html.decode("utf-8")        
-            fdata = json.loads(data)
+    async with aiohttp.ClientSession() as session:
+        to_do = get_tasks(session,skill_name)
+        responses = await asyncio.gather(*to_do)
+        for response in responses:
+            fdata = await response.json()
             for i in range(0,20): 
                 #check names get rank
-                player_rank = 20 * k + i + 1
+                #player_rank = 20 * k + i + 1
                 player_name = fdata[i]["name"]
                 xp = fdata[i]["xp"]
                 tag = player_name.split()[0]
                 tag = tag.upper()
-                
                 if tag == guildtag.upper():
-                    if player_name in guildreg :
-                        guildreg[player_name]+=xp
+                    if player_name in guildreg_names :
                         continue
                     else:
-                        guildreg[player_name]=xp
+                        guildreg_names[player_name]=xp
+                        #guildreg_ranks[player_name]=player_rank
                         continue
-        
-        
-    temp_dic = {k: v for k, v in sorted(guildreg.items(), key=lambda item: item[1],reverse=True)}
-    
+    temp_dic = {k: v for k, v in sorted(guildreg_names.items(), key=lambda item: item[1],reverse=True)}
     members_sorted.clear()
     for key, value in temp_dic.items():
-        test = key + " -- " + "{:,}".format(value)
+        test = key + " -- " + "{:,}".format(value) +"\n [Lv."+str(tabfill(value)[0])+" ("+str(tabfill(value)[1])+"%)]"
         members_sorted.append(test)
-    
     mini_list = []
     for i in range(len(members_sorted)):
         mini_list.append(members_sorted[i])
     members_sorted.clear()
     temp_dic = {}
-    return mini_list
+    end = time.time()
+    total_time = end - start
+    #print(mini_list)
+    #print(total_time)
+    return mini_list, total_time
+
+#get guilds members rankings in total xp (20000)
+async def searchtagtotal(guildtag):
+    start = time.time()
+    members_sorted = []
+    guildreg = {}
+    
+    for skill_name in skill :
+        async with aiohttp.ClientSession() as session:
+            to_do = get_tasks(session,skill_name)
+            responses = await asyncio.gather(*to_do)
+            for response in responses:
+                fdata = await response.json()
+                for i in range(0,20): 
+                    #check names get rank
+                    #player_rank = 20 * k + i + 1
+                    player_name = fdata[i]["name"]
+                    xp = fdata[i]["xp"]
+                    tag = player_name.split()[0]
+                    tag = tag.upper()
+                    
+                    if tag == guildtag.upper():
+                        if player_name in guildreg :
+                            guildreg[player_name]+=xp
+                            continue
+                        else:
+                            guildreg[player_name]=xp
+                            continue
+    temp_dic = {k: v for k, v in sorted(guildreg.items(), key=lambda item: item[1],reverse=True)}
+    members_sorted.clear()
+    for key, value in temp_dic.items():
+        test = key + " -- " + "{:,}".format(value)
+        members_sorted.append(test)
+    mini_list = []
+    for i in range(len(members_sorted)):
+        mini_list.append(members_sorted[i])
+    members_sorted.clear()
+    temp_dic = {}
+    end = time.time()
+    total_time = end - start
+    return mini_list, total_time
 
 #get guilds ranking in a certain skill (5000)
 def search(skill_name):
@@ -355,8 +315,8 @@ def search(skill_name):
     list_guilds_stred.clear()
     temp_guilds = ResetDict(guilds_counter_int)
     return mini_list
-  
-  
+    
+    
 #get guilds ranking in total xp (5000)
 def searchTotal():
     list_guilds_total_stred = []
@@ -475,53 +435,52 @@ def SearchMembers(guildtag,rnk):
 #############################################################################Bot_Main_Code##############################################################################
 
 
-client = d.Client()
-client = commands.Bot(command_prefix='!')
+bot = commands.Bot(command_prefix='!')
 
-client.remove_command("help")
-client.remove_command("date")
-client.remove_command('random')
-@client.event
+bot.remove_command("help")
+bot.remove_command("date")
+bot.remove_command('random')
+@bot.event
 async def on_ready():
-    print('Logging in as {0.user}'.format(client))
-    await client.change_presence(activity=d.Activity(type=d.ActivityType.watching, name="LeaderBoard"))
+    print('Logging in as {0.user}'.format(bot))
+    await bot.change_presence(activity=d.Activity(type=d.ActivityType.watching, name="LeaderBoard"))
 
-@client.command()
+@bot.command()
 async def ping(ctx):
-    await ctx.send(f"Pong! {round(client.latency * 1000)}ms")
+    await ctx.send(f"Pong! {round(bot.latency * 1000)}ms")
     
 
 
-@client.command()
+@bot.command()
 async def hello(ctx):
     username = str(ctx.author).split('#')[0]
     await ctx.send(f"Hello {username}!")
 
-@client.command()
+@bot.command()
 async def wussup(ctx):
     username = str(ctx.author).split('#')[0]
     await ctx.send(f"Nothing much, hbu {username} ?")
 
-@client.command()
+@bot.command()
 async def bye(ctx):
     username = str(ctx.author).split('#')[0]
     await ctx.send(f"See you later {username}!")
 
-@client.command(name="OwO",aliases=["owo","Owo","oWo"])
+@bot.command(name="OwO",aliases=["owo","Owo","oWo"])
 async def OwO(ctx):
     await ctx.send(f"Numba Wan !!")
 
-@client.command(name='dc',aliases=['disconnect','logout'])
+@bot.command(name='dc',aliases=['disconnect','logout'])
 async def dc(ctx):
-    await client.logout()
+    await bot.logout()
 
-@client.command()
+@bot.command()
 async def date(ctx):
     d1 = dt.today().strftime("%d/%m/%Y")
     await ctx.send(f'Today is : {d1}')
 
 
-@client.command(name='combat',aliases=['melee','sw'])
+@bot.command(name='combat',aliases=['melee','sw'])
 async def combat(ctx,rank):
     if ((int(rank)<=0) or (int(rank)>25)):
         await ctx.send("Ranks must be between 1 and 25")
@@ -534,7 +493,7 @@ async def combat(ctx,rank):
     await ctx.send(embed=embedVar1)
     test_list_1.clear()
 
-@client.command(name='mining',aliases=['mine','rocky','pick','krieger'])
+@bot.command(name='mining',aliases=['mine','rocky','pick','krieger'])
 async def mining(ctx,rank):
     if ((int(rank)<=0) or (int(rank)>25)):
         await ctx.send("Ranks must be between 1 and 25")
@@ -547,7 +506,7 @@ async def mining(ctx,rank):
         await ctx.send(embed=embedVar2)
         test_list_2.clear()
 
-@client.command(name='smithing',aliases=['smith','ember','hammer','kreiger'])
+@bot.command(name='smithing',aliases=['smith','ember','hammer','kreiger'])
 async def smithing(ctx,rank):
     if ((int(rank)<=0) or (int(rank)>25)):
         await ctx.send("Ranks must be between 1 and 25")
@@ -560,7 +519,7 @@ async def smithing(ctx,rank):
         await ctx.send(embed=embedVar3)
         test_list_3.clear()
 
-@client.command(name='woodcutting',aliases=['wc','pecker','axe','matt'])
+@bot.command(name='woodcutting',aliases=['wc','pecker','axe','matt'])
 async def woodcutting(ctx,rank):
     if ((int(rank)<=0) or (int(rank)>25)):
         await ctx.send("Ranks must be between 1 and 25")
@@ -573,7 +532,7 @@ async def woodcutting(ctx,rank):
         await ctx.send(embed=embedVar4)
         test_list_4.clear()
 
-@client.command(name='crafting',aliases=['craft','woody','yekzer'])
+@bot.command(name='crafting',aliases=['craft','woody','yekzer'])
 async def crafting(ctx,rank):
     if ((int(rank)<=0) or (int(rank)>25)):
         await ctx.send("Ranks must be between 1 and 25")
@@ -586,7 +545,7 @@ async def crafting(ctx,rank):
         await ctx.send(embed=embedVar5)
         test_list_5.clear()
 
-@client.command(name='fishing',aliases=['fish','tantrid','tant'])
+@bot.command(name='fishing',aliases=['fish','tantrid','tant'])
 async def fishing(ctx,rank):
     if ((int(rank)<=0) or (int(rank)>25)):
         await ctx.send("Ranks must be between 1 and 25")
@@ -599,7 +558,7 @@ async def fishing(ctx,rank):
         await ctx.send(embed=embedVar6)
         test_list_6.clear()
 
-@client.command(name='cooking',aliases=['cook','food'])
+@bot.command(name='cooking',aliases=['cook','food'])
 async def cooking(ctx,rank):
     if ((int(rank)<=0) or (int(rank)>25)):
         await ctx.send("Ranks must be between 1 and 25")
@@ -612,7 +571,7 @@ async def cooking(ctx,rank):
         await ctx.send(embed=embedVar7)
         test_list_7.clear()
 
-@client.command(name='total',aliases=['totalxp'])
+@bot.command(name='total',aliases=['totalxp'])
 async def total(ctx,rank):
     if ((int(rank)<=0) or (int(rank)>25)):
         await ctx.send("Ranks must be between 1 and 25")
@@ -625,7 +584,7 @@ async def total(ctx,rank):
         await ctx.send(embed=embedVar0)
         test_list_0.clear()
         
-@client.command()
+@bot.command()
 async def test(ctx):
     embedVar = d.Embed(title="TEST", color=0x6600ff)
     embedVar.add_field(name="test", value= "testtesttest" , inline=False)
@@ -636,7 +595,7 @@ async def test(ctx):
     await ctx.send(embed=embedVar)
     await ctx.send(embed=embedVarr)
 
-@client.command(name='all',aliases=['overall','ranking'])
+@bot.command(name='all',aliases=['overall','ranking'])
 async def all(ctx):
     mining = get(ctx.guild.emojis, name="mining")
     wc = get(ctx.guild.emojis, name="woodcutting")
@@ -662,12 +621,19 @@ async def all(ctx):
 
 
 
-@client.command(name='guildlb',aliases=['glb','guildboard'])
+@bot.command(name='guildlb',aliases=['glb','guildboard'])
 async def guildlb(ctx,skill_name,guildtag):
     guild_name = guildtag.upper()
     await ctx.send(f"Getting {guild_name}'s {skill_name} Leaderboard ... ")
     x = skills.index(skill_name.lower())
-    test_list_8 = searchtag(skill[x],guildtag)
+
+    guildlb_srch = searchtag(skill[x],guildtag)
+    #loop = asyncio.get_event_loop()
+    #future = await asyncio.ensure_future(guildlb_srch)
+    #a = loop.run_until_complete(future)
+    a = asyncio.run(guildlb_srch)
+    test_list_8 = a[0]
+    
     tag = guildtag.upper()
 
     guildlb_msg = f"Top "+tag+": "+skill_name.capitalize()+"(20,000)"
@@ -714,10 +680,12 @@ async def guildlb(ctx,skill_name,guildtag):
         embeds_list[i].add_field(name='\u200b', value= members_msg0 , inline=False)
         members_msg0=""
         await ctx.send(embed=embeds_list[i])
-    test_list_8.clear()
+    time_taken = a[1]
+    time_take = int(time_taken) 
+    await ctx.send("time taken : "+str(time_take)+"'s")
+    test_list_8.clear()    
     
-    
-@client.command()
+"""@bot.command()
 async def event(ctx):
 
     await ctx.send(f"Getting Combat Grinders Leaderboard ... ")
@@ -729,15 +697,24 @@ async def event(ctx):
     await ctx.send(f"{temp_msg}")
     temp_msg0 = "Total Guild Gained Xp"+' -- '+"{:,}".format(results_list[len(results_list)-1])
     await ctx.send(f"{temp_msg0}")
-    results_list.clear()
+    results_list.clear()"""
 
 
     
-@client.command(name='guildlbT',aliases=['glbt','guildranks'])
+@bot.command(name='guildlbT',aliases=['glbt','guildranks'])
 async def guildlbT(ctx,guildtag):
     guild_name = guildtag.upper()
     await ctx.send(f"Getting {guild_name}'s Leaderboard ... ")
-    test_list_10 = searchtagtotal(guildtag)
+    
+
+    guildlbT_srch = searchtagtotal(guildtag)
+    #loop = asyncio.get_event_loop()
+    #future = await asyncio.ensure_future(guildlb_srch)
+    #a = loop.run_until_complete(future)
+    a = asyncio.run(guildlbT_srch)
+    test_list_10 = a[0]
+
+
     tag = guildtag.upper()
 
     guildlb_msg = f"Top "+tag+": "+"[Total XP](20,000)"
@@ -783,13 +760,16 @@ async def guildlbT(ctx,guildtag):
         embeds_list[i].add_field(name='\u200b', value= members_msg0 , inline=False)
         members_msg0=""
         await ctx.send(embed=embeds_list[i])
+    time_taken = a[1]
+    time_take = int(time_taken) 
+    await ctx.send("time taken : "+str(time_take)+"'s")
     test_list_10.clear()                  
 
 
 
 
     
-@client.command(name="guildcount",aliases=['gc','count','howmany','hm'])
+@bot.command(name="guildcount",aliases=['gc','count','howmany','hm'])
 async def guildcount(ctx,guildtag,rank):
     guild_name = guildtag.upper()
     await ctx.send(f"Countings {guild_name}'s members")
@@ -877,7 +857,7 @@ async def guildcount(ctx,guildtag,rank):
 
 
 
-@client.command(name='help',aliases=['help?','helpme','commands?','command?','cmd'])
+@bot.command(name='help',aliases=['help?','helpme','commands?','command?','cmd'])
 async def help(ctx):
     embedVar9 = d.Embed(title="Guilds Commands", color=0x669999)
     embedVar9.add_field(name="-----skills ranking-----", value= "!{Skill's Command} {How Many Guilds to Display}" , inline=False)
@@ -903,4 +883,5 @@ async def help(ctx):
 
 
 
-client.run(os.getenv('TOKEN'))
+bot.run(os.getenv('TOKEN'))
+#bot.run('ODgxMTc4MzEzMTYxMzEwMjI4.YSpDQQ.kAGVhMHK0BwWBmeLQAKfTiasbdA')
