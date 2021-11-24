@@ -754,7 +754,7 @@ async def guildlbT(ctx,guildtag):
     for i in range(embeds_int):
         members_msg0 = ""
         loop_list = []
-        for j in range(fields_int):
+        for j in range(embeds_int):
             loop_list.append(j*15)
         loop_list.append(counter_int)
         
@@ -825,7 +825,12 @@ async def guildcount(ctx,guildtag,rank):
         embed9 = d.Embed(title="\u200b", color=0x6600ff)
         embed10 = d.Embed(title="\u200b", color=0x6600ff)
         embed11 = d.Embed(title="\u200b", color=0x6600ff)
-        embeds_list = [embed0,embed1,embed2,embed3,embed4]
+        embed12 = d.Embed(title="\u200b", color=0x6600ff)
+        embed13 = d.Embed(title="\u200b", color=0x6600ff)
+        embed14 = d.Embed(title="\u200b", color=0x6600ff)
+        embed15 = d.Embed(title="\u200b", color=0x6600ff)
+
+        embeds_list = [embed0,embed1,embed2,embed3,embed4,embed5,embed6,embed7,embed8,embed9,embed10,embed11,embed12,embed13,embed14,embed15]
         exf = math.ceil(counter_int / 65)
         embeds_int = exf
         fields_int = exf
@@ -862,7 +867,7 @@ async def guildcount(ctx,guildtag,rank):
 @bot.command(name='help',aliases=['help?','helpme','commands?','command?','cmd'])
 async def help(ctx):
     embedVar9 = d.Embed(title="Guilds Commands", color=0x669999)
-    embedVar9.add_field(name="-----skills ranking-----", value= "!{Skill's Command} {How Many Guilds to Display}" , inline=False)
+    embedVar9.add_field(name="-----skills ranking-----", value= "!{Skill's Command} {How Many Guilds to Display(max 25)}" , inline=False)
     embedVar9.add_field(name="!combat or !melee or !sw", value= "Show Top Guilds in Combat (From Top 5,000 players)" , inline=False)
     embedVar9.add_field(name="!mining or !mine or !pick or !rocky or !krieger", value= "Show Top Guilds in Mining (From Top 5,000 players)" , inline=False)
     embedVar9.add_field(name="!smithing or !smith or !hammer or !ember", value= "Show Top Guilds in Smithing (From Top 5,000 players)" , inline=False)
@@ -885,5 +890,5 @@ async def help(ctx):
 
 
 
-#bot.run(os.getenv('TOKEN'))
-bot.run('ODgxMTc4MzEzMTYxMzEwMjI4.YSpDQQ.Ri_wj4nQAeHk7PdvLvmIWlo-OOw')
+bot.run(os.getenv('TOKEN'))
+#bot.run('')
