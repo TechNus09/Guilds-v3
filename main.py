@@ -635,6 +635,8 @@ async def guildlb(ctx,skill_name,guildtag):
     test_list_8 = a[0]
     
     tag = guildtag.upper()
+    time_taken = a[1]
+    cmd_time = int(time_taken) 
 
     guildlb_msg = f"Top "+tag+": "+skill_name.capitalize()+"(20,000)"
     embedVar = d.Embed(title= guildlb_msg , color=0x0066ff)
@@ -679,10 +681,10 @@ async def guildlb(ctx,skill_name,guildtag):
             members_msg0 = members_msg0 + rankk(k+1) + "\n" + test_list_8[k] + '\n'
         embeds_list[i].add_field(name='\u200b', value= members_msg0 , inline=False)
         members_msg0=""
+        if i == embeds_int-1:
+            embeds_list[i].set_footer(text="time taken : "+str(cmd_time)+" seconds.")
         await ctx.send(embed=embeds_list[i])
-    time_taken = a[1]
-    time_take = int(time_taken) 
-    await ctx.send("time taken : "+str(time_take)+"'s")
+    
     test_list_8.clear()    
     
 """@bot.command()
@@ -711,8 +713,8 @@ async def guildlbT(ctx,guildtag):
     #loop = asyncio.get_event_loop()
     #future = await asyncio.ensure_future(guildlb_srch)
     #a = loop.run_until_complete(future)
-    a = asyncio.run(guildlbT_srch)
-    test_list_10 = a[0]
+    temp_result_T = asyncio.run(guildlbT_srch)
+    test_list_10 = temp_result_T[0]
 
 
     tag = guildtag.upper()
@@ -747,7 +749,8 @@ async def guildlbT(ctx,guildtag):
     embeds_list = [embed0,embed1,embed2,embed3,embed4,embed5,embed6,embed7,embed8,embed9,embed10,embed11,embed12,embed13,embed14,embed15,embed16,embed17]
     
     members_msg0 = ""
-    
+    time_taken = temp_result_T[1]
+    time_take = int(time_taken) 
     for i in range(embeds_int):
         members_msg0 = ""
         loop_list = []
@@ -759,11 +762,10 @@ async def guildlbT(ctx,guildtag):
             members_msg0 = members_msg0 + rankk(k+1) + "\n" + test_list_10[k] + '\n'
         embeds_list[i].add_field(name='\u200b', value= members_msg0 , inline=False)
         members_msg0=""
+        if i == embeds_int-1:
+            embeds_list[i].set_footer(text="time taken : "+str(time_take)+" seconds.")
         await ctx.send(embed=embeds_list[i])
-    time_taken = a[1]
-    time_take = int(time_taken) 
-    await ctx.send("time taken : "+str(time_take)+"'s")
-    test_list_10.clear()                  
+        test_list_10.clear()                  
 
 
 
@@ -883,5 +885,5 @@ async def help(ctx):
 
 
 
-bot.run(os.getenv('TOKEN'))
-#bot.run('ODgxMTc4MzEzMTYxMzEwMjI4.YSpDQQ.kAGVhMHK0BwWBmeLQAKfTiasbdA')
+#bot.run(os.getenv('TOKEN'))
+bot.run('ODgxMTc4MzEzMTYxMzEwMjI4.YSpDQQ.Ri_wj4nQAeHk7PdvLvmIWlo-OOw')
