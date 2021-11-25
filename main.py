@@ -951,5 +951,4 @@ async def help(ctx):
 
 
 
-#bot.run(os.getenv('TOKEN'))
-bot.run('ODgxMTc4MzEzMTYxMzEwMjI4.YSpDQQ.vHXx3L5WnLMaxWLV9Y8CpHUOZec')
+bot.run(os.getenv('TOKEN'))
