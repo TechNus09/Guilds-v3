@@ -196,6 +196,12 @@ def get_tasks(session,skill_name):
         url='https://www.curseofaros.com/highscores'
         tasks.append(asyncio.create_task(session.get(url+skill_name+'.json?p='+str(k))))
     return tasks
+def get_tasks2(session,skill_name,limit):
+    tasks = []
+    for k in range(0,limit):  
+        url='https://www.curseofaros.com/highscores'
+        tasks.append(asyncio.create_task(session.get(url+skill_name+'.json?p='+str(k))))
+    return tasks
 
 #get guild members rankings in a certain skill (20000)    
 async def searchtag(skill_name,guildtag):
@@ -413,17 +419,15 @@ async def LeaderBoard():
     total_time = end - start
     return list_lists ,total_time
 #show members counts and lists of a certain guild in a certain range (rnk)
-def SearchMembers(guildtag,rnk):
+async def SearchMembers(guildtag,rnk):
     members_names = []
     limit = (rnk // 20) +1
     for skill_name in skill:
-        for k in range(0,limit):  
-            url='https://www.curseofaros.com/highscores'
-            headers = {'User-Agent': 'Mozilla/5.0'}        
-            request = Request(url+skill_name+'.json?p='+str(k), headers=headers)
-            html = urlopen(request).read()       
-            data = html.decode("utf-8")        
-            fdata = json.loads(data)
+        async with aiohttp.ClientSession() as session:
+            to_do = get_tasks(session,skill_name,limit)
+            responses = await asyncio.gather(*to_do)
+            for response in responses:
+                fdata = await response.json()
             for i in range(0,20): 
                 player_name = fdata[i]["name"]
                 tag = player_name.split()[0]
@@ -836,7 +840,11 @@ async def guildlbT(ctx,guildtag):
 async def guildcount(ctx,guildtag,rank):
     guild_name = guildtag.upper()
     await ctx.send(f"Countings {guild_name}'s members")
-    y = SearchMembers(guild_name,int(rank))
+    count_srch = SearchMembers(guild_name,int(rank))
+    a = asyncio.run(count_srch)
+    y = a[0]
+    time_taken = a[1]
+    cmd_time = int(time_taken)
     counter_int = len(y)
     counter_msg = f"{guild_name}'s Members at Top {rank}"
     embedVar8 = d.Embed(title= counter_msg , color=0x0066ff)
@@ -853,6 +861,7 @@ async def guildcount(ctx,guildtag,rank):
         for i in range(counter_int):
             members_msg = members_msg + y[i] + '\n'
         embed.add_field(name="\u200b", value= members_msg , inline=False)
+        embed.set_footer(text="time taken : "+str(cmd_time)+" seconds.")
         await ctx.send(embed=embed)      
     ###############################Guilds_Between_65_And_325_members###############################################
     elif ((counter_int>65) and (counter_int<325)):
@@ -870,8 +879,10 @@ async def guildcount(ctx,guildtag,rank):
             for j in range(loop_list[i],loop_list[i+1]):
                 members_msg0 = members_msg0 + y[j] + '\n'
             embed.add_field(name='\u200b', value= members_msg0 , inline=False)
+            if i == fields_int-1:
+                embed.set_footer(text="time taken : "+str(cmd_time)+" seconds.")
             members_msg0=""
-        await ctx.send(embed=embed)
+            await ctx.send(embed=embed)
     ##################################Guilds_Between_325_And_1625_members############################################
     elif ((counter_int>=325) and (counter_int<1625)):
         embed0 = d.Embed(title="\u200b", color=0x6600ff)
