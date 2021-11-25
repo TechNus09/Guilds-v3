@@ -318,30 +318,29 @@ async def search(skill_name):
     
     
 #get guilds ranking in total xp (5000)
-def searchTotal():
+async def searchTotal():
+    start = time.time()
     list_guilds_total_stred = []
     dd_test = ResetDict(guilds_counter_int)
-    for m in range(0,7):
-        for k in range(0,1000):  
-            url='https://www.curseofaros.com/highscores'
-            headers = {'User-Agent': 'Mozilla/5.0'}        
-            request = Request(url+skill[m]+'.json?p='+str(k), headers=headers)
-            html = urlopen(request).read()       
-            data = html.decode("utf-8")        
-            fdata = json.loads(data)
-            for i in range(0,20): 
-                #check names get rank
-                player_name = fdata[i]["name"]
-                xp = fdata[i]["xp"]
-                tag = player_name.split()[0]
-                tag = tag.upper()
-                
-                if tag in dd_test :
-                    dd_test[tag] += xp
-                elif "Immortal" in player_name :
-                    dd_test["IMMORTAL"] += xp
-                else :                
-                    continue
+    for skill_name in skill:
+        async with aiohttp.ClientSession() as session:
+            to_do = get_tasks(session,skill_name)
+            responses = await asyncio.gather(*to_do)
+            for response in responses:
+                fdata = await response.json()
+                for i in range(0,20): 
+                    #check names
+                    player_name = fdata[i]["name"]
+                    xp = fdata[i]["xp"]
+                    tag = player_name.split()[0]
+                    tag = tag.upper()
+                    
+                    if tag in dd_test :
+                        dd_test[tag] += xp
+                    elif "Immortal" in player_name :
+                        dd_test["IMMORTAL"] += xp
+                    else :                
+                        continue
             
     temp_guilds = {k: v for k, v in sorted(dd_test.items(), key=lambda item: item[1],reverse=True)}
     
@@ -352,7 +351,9 @@ def searchTotal():
             mini_list.append(list_guilds_total_stred[i])
     list_guilds_total_stred.clear()
     temp_guilds = ResetDict(guilds_counter_int)
-    return mini_list
+    end = time.time()
+    total_time = end - start
+    return mini_list, total_time
 
 
 #get guilds overall ranking (20000)
@@ -597,7 +598,6 @@ async def cooking(ctx,rank="25"):
         await ctx.send("Ranks must be between 1 and 25")
     else:
         await ctx.send("Fetching Cooking Data ... ")
-        test_list_7 = search("-cooking")
         cookinglb_srch = search("-cooking")
         a = asyncio.run(cookinglb_srch)
         test_list_7 = a[0]
@@ -621,7 +621,6 @@ async def total(ctx,rank='25'):
         test_list_0 = a[0]
         time_taken = a[1]
         cmd_time = int(time_taken) 
-
         embedVar0 = d.Embed(title="Top Guilds: Total XP (20,000)", color=0x6600ff)
         for i in range(int(rank)):
             embedVar0.add_field(name=rankk(i+1), value= test_list_0[i] , inline=False)
@@ -654,20 +653,21 @@ async def all(ctx):
                         f' {crafting} Top Guilds Crafting\n',f' {cooking} Top Guilds Cooking\n',f' {combat} Top Guilds Combat\n',"Top Guilds Total XP\n"]
     await ctx.send("Fetching Data ... ")
     embedVar1 = d.Embed(title="Top Guilds (20,000)", color=0x669999)
-
-
-    listed = LeaderBoard()
-
-
     
+    alllb_srch = LeaderBoard()
+    a = asyncio.run(alllb_srch)
+    listed = a[0]
+    time_taken = a[1]
+    cmd_time = int(time_taken) 
     wierd_order = [1,3,5,2,4,6,0,7]
     for i in range(8) :
         msg = ""
         for j in range(10):
             msg = msg + rankk(j+1) + ' ' + listed[wierd_order[i]][j]+'\n'
         embedVar1.add_field(name= field_header[i], value= msg , inline=True)
+    embedVar1.set_footer(text="time taken : "+str(cmd_time)+" seconds.")
     await ctx.send(embed=embedVar1)
-        
+    listed.clear()
 
 
 
@@ -951,4 +951,5 @@ async def help(ctx):
 
 
 
-bot.run(os.getenv('TOKEN'))
+#bot.run(os.getenv('TOKEN'))
+bot.run('ODgxMTc4MzEzMTYxMzEwMjI4.YSpDQQ.vHXx3L5WnLMaxWLV9Y8CpHUOZec')
