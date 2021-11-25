@@ -420,11 +420,12 @@ async def LeaderBoard():
     return list_lists ,total_time
 #show members counts and lists of a certain guild in a certain range (rnk)
 async def SearchMembers(guildtag,rnk):
+    start = time.time()
     members_names = []
     limit = (rnk // 20) +1
     for skill_name in skill:
         async with aiohttp.ClientSession() as session:
-            to_do = get_tasks(session,skill_name,limit)
+            to_do = get_tasks2(session,skill_name,limit)
             responses = await asyncio.gather(*to_do)
             for response in responses:
                 fdata = await response.json()
@@ -438,7 +439,9 @@ async def SearchMembers(guildtag,rnk):
                     else:
                         members_names.append(player_name)
                         continue
-    return members_names
+    end = time.time()
+    total_time = end - start
+    return members_names, total_time
 
 #############################################################################Bot_Main_Code##############################################################################
 
@@ -963,3 +966,4 @@ async def help(ctx):
 
 
 bot.run(os.getenv('TOKEN'))
+
