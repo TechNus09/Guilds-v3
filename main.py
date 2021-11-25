@@ -424,7 +424,7 @@ async def SearchMembers(guildtag,rnk):
     limit = (rnk // 20) +1
     for skill_name in skill:
         async with aiohttp.ClientSession() as session:
-            to_do = get_tasks(session,skill_name,limit)
+            to_do = get_tasks2(session,skill_name,limit)
             responses = await asyncio.gather(*to_do)
             for response in responses:
                 fdata = await response.json()
