@@ -546,7 +546,8 @@ async def getlist(ctx):
     a = asyncio.run(list)
     members_xp_list = a[0]
     time_taken = a[1]
-    await ctx.send(members_xp_list)
+    for i in range(Len(members_xp_list):
+        await ctx.send(members_xp_list[i])
     await ctx.send(f'time taken {time_taken}')
 
 
