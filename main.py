@@ -561,7 +561,7 @@ async def combat(ctx,rank="25"):
         test_list_1 = a[0]
         time_taken = a[1]
         cmd_time = int(time_taken) 
-        embedVar1 = d.Embed(title="Top Guilds: Combat (20,000)", color=0x669999)
+        embedVar1 = d.Embed(title="Top Guilds: Combat (60,000)", color=0x669999)
         for i in range(int(rank)):
             embedVar1.add_field(name=rankk(i+1), value= test_list_1[i] , inline=False)
         embedVar1.set_footer(text="time taken : "+str(cmd_time)+" seconds.")
@@ -579,7 +579,7 @@ async def mining(ctx,rank="25"):
         test_list_2 = a[0]
         time_taken = a[1]
         cmd_time = int(time_taken) 
-        embedVar2 = d.Embed(title="Top Guilds: Mining (20,000)", color=0x333300)
+        embedVar2 = d.Embed(title="Top Guilds: Mining (60,000)", color=0x333300)
         for i in range(int(rank)):
             embedVar2.add_field(name=rankk(i+1), value= test_list_2[i] , inline=False)
         embedVar2.set_footer(text="time taken : "+str(cmd_time)+" seconds.")
@@ -597,7 +597,7 @@ async def smithing(ctx,rank="25"):
         test_list_3 = a[0]
         time_taken = a[1]
         cmd_time = int(time_taken) 
-        embedVar3 = d.Embed(title="Top Guilds: Smithing (20,000)", color=0xff0000)
+        embedVar3 = d.Embed(title="Top Guilds: Smithing (60,000)", color=0xff0000)
         for i in range(int(rank)):
             embedVar3.add_field(name=rankk(i+1), value= test_list_3[i] , inline=False)
         embedVar3.set_footer(text="time taken : "+str(cmd_time)+" seconds.")
@@ -615,7 +615,7 @@ async def woodcutting(ctx,rank="25"):
         test_list_4 = a[0]
         time_taken = a[1]
         cmd_time = int(time_taken) 
-        embedVar4 = d.Embed(title="Top Guilds: Woodcutting (20,000)", color=0x00cc00)
+        embedVar4 = d.Embed(title="Top Guilds: Woodcutting (60,000)", color=0x00cc00)
         for i in range(int(rank)):
             embedVar4.add_field(name=rankk(i+1), value= test_list_4[i] , inline=False)
         embedVar4.set_footer(text="time taken : "+str(cmd_time)+" seconds.")
@@ -633,7 +633,7 @@ async def crafting(ctx,rank="25"):
         test_list_5 = a[0]
         time_taken = a[1]
         cmd_time = int(time_taken) 
-        embedVar5 = d.Embed(title="Top Guilds: Crafting (20,000)", color=0x996633)
+        embedVar5 = d.Embed(title="Top Guilds: Crafting (60,000)", color=0x996633)
         for i in range(int(rank)):
             embedVar5.add_field(name=rankk(i+1), value= test_list_5[i] , inline=False)
         embedVar5.set_footer(text="time taken : "+str(cmd_time)+" seconds.")
@@ -651,7 +651,7 @@ async def fishing(ctx,rank="25"):
         test_list_6 = a[0]
         time_taken = a[1]
         cmd_time = int(time_taken) 
-        embedVar6 = d.Embed(title="Top Guilds: Fishing (20,000)", color=0x0066ff)
+        embedVar6 = d.Embed(title="Top Guilds: Fishing (60,000)", color=0x0066ff)
         for i in range(int(rank)):
             embedVar6.add_field(name=rankk(i+1), value= test_list_6[i] , inline=False)
         embedVar6.set_footer(text="time taken : "+str(cmd_time)+" seconds.")
@@ -669,7 +669,7 @@ async def cooking(ctx,rank="25"):
         test_list_7 = a[0]
         time_taken = a[1]
         cmd_time = int(time_taken) 
-        embedVar7 = d.Embed(title="Top Guilds: Cooking (20,000)", color=0x800000)
+        embedVar7 = d.Embed(title="Top Guilds: Cooking (60,000)", color=0x800000)
         for i in range(int(rank)):
             embedVar7.add_field(name=rankk(i+1), value= test_list_7[i] , inline=False)
         embedVar7.set_footer(text="time taken : "+str(cmd_time)+" seconds.")
@@ -687,7 +687,7 @@ async def total(ctx,rank='25'):
         test_list_0 = a[0]
         time_taken = a[1]
         cmd_time = int(time_taken) 
-        embedVar0 = d.Embed(title="Top Guilds: Total XP (20,000)", color=0x6600ff)
+        embedVar0 = d.Embed(title="Top Guilds: Total XP (60,000)", color=0x6600ff)
         for i in range(int(rank)):
             embedVar0.add_field(name=rankk(i+1), value= test_list_0[i] , inline=False)
         embedVar0.set_footer(text="time taken : "+str(cmd_time)+" seconds.")
@@ -718,7 +718,7 @@ async def all(ctx):
     field_header = [f' {mining} Top Guilds Mining \n',f' {wc} Top Guilds Woodcutting\n',f' {fishing} Top Guilds Fishing\n',f' {smithing} Top Guilds Smithing\n',
                         f' {crafting} Top Guilds Crafting\n',f' {cooking} Top Guilds Cooking\n',f' {combat} Top Guilds Combat\n',"Top Guilds Total XP\n"]
     await ctx.send("Fetching Data ... ")
-    embedVar1 = d.Embed(title="Top Guilds (20,000)", color=0x669999)
+    embedVar1 = d.Embed(title="Top Guilds (60,000)", color=0x669999)
     
     alllb_srch = LeaderBoard()
     a = asyncio.run(alllb_srch)
@@ -754,7 +754,7 @@ async def guildlb(ctx,skill_name,guildtag):
     time_taken = a[1]
     cmd_time = int(time_taken) 
 
-    guildlb_msg = f"Top "+tag+": "+skill_name.capitalize()+"(20,000)"
+    guildlb_msg = f"Top "+tag+": "+skill_name.capitalize()+"(60,000)"
     embedVar = d.Embed(title= guildlb_msg , color=0x0066ff)
     embedVar.add_field(name="Skillers count", value= str(len(test_list_8)) , inline=False)
     await ctx.send(embed=embedVar)
@@ -847,7 +847,7 @@ async def guildlbT(ctx,guildtag):
     time_taken = temp_result_T[1]
     time_take = int(time_taken) 
 
-    guildlb_msg = f"Top "+tag+": "+"[Total XP](20,000)"
+    guildlb_msg = f"Top "+tag+": "+"[Total XP](60,000)"
     embedVar = d.Embed(title= guildlb_msg , color=0x0066ff)
     embedVar.add_field(name="Players Count", value= str(len(test_list_10)) , inline=False)
     await ctx.send(embed=embedVar)
@@ -1002,17 +1002,17 @@ async def guildcount(ctx,guildtag,rank):
 async def help(ctx):
     embedVar9 = d.Embed(title="Guilds Commands", color=0x669999)
     embedVar9.add_field(name="-----skills ranking-----", value= "!{Skill's Command} {How Many Guilds to Display(max 25)}" , inline=False)
-    embedVar9.add_field(name="!combat or !melee or !sw", value= "Show Top Guilds in Combat (From Top 20,000 players)" , inline=False)
-    embedVar9.add_field(name="!mining or !mine or !pick or !rocky or !krieger", value= "Show Top Guilds in Mining (From Top 20,000 players)" , inline=False)
-    embedVar9.add_field(name="!smithing or !smith or !hammer or !ember", value= "Show Top Guilds in Smithing (From Top 20,000 players)" , inline=False)
-    embedVar9.add_field(name="!woodcutting or !wc or !pecker or !matt", value= "Show Top Guilds in Woodcutting (From Top 20,000 players)" , inline=False)
-    embedVar9.add_field(name="!crafting or !craft or !woody or !yekzer", value= "Show Top Guilds in Crafting (From Top 20,000 players)" , inline=False)
-    embedVar9.add_field(name="!fishing or !fish or !tantrid or !tant", value= "Show Top Guilds in Fishing (From Top 20,000 players)" , inline=False)
-    embedVar9.add_field(name="!cooking or !cook or !food", value= "Show Top Guilds in Cooking (From Top 20,000 players)" , inline=False)
-    embedVar9.add_field(name="!total or !totalxp", value= "Show Top Guilds in Total XP (From Top 20,000 players)" , inline=False)
-    embedVar9.add_field(name="!all or !overall or !ranking", value= "Show an Overall Leaderboard (From Top 20,000 players)" , inline=False)
-    embedVar9.add_field(name="!guildlb or !glb or !guildboard", value= "Show The Leaderboard of a Guild in a Skill (From Top 20,000 players)\n !guildlb {skill name} {guild tag}" , inline=False)
-    embedVar9.add_field(name="!guildlbT or !glbT or !guildboardT", value= "Show The Leaderboard of a Guild in Total XP (From Top 20,000 players)\n !guildlbT {guild tag}" , inline=False)
+    embedVar9.add_field(name="!combat or !melee or !sw", value= "Show Top Guilds in Combat (From Top 60,000 players)" , inline=False)
+    embedVar9.add_field(name="!mining or !mine or !pick or !rocky or !krieger", value= "Show Top Guilds in Mining (From Top 60,000 players)" , inline=False)
+    embedVar9.add_field(name="!smithing or !smith or !hammer or !ember", value= "Show Top Guilds in Smithing (From Top 60,000 players)" , inline=False)
+    embedVar9.add_field(name="!woodcutting or !wc or !pecker or !matt", value= "Show Top Guilds in Woodcutting (From Top 60,000 players)" , inline=False)
+    embedVar9.add_field(name="!crafting or !craft or !woody or !yekzer", value= "Show Top Guilds in Crafting (From Top 60,000 players)" , inline=False)
+    embedVar9.add_field(name="!fishing or !fish or !tantrid or !tant", value= "Show Top Guilds in Fishing (From Top 60,000 players)" , inline=False)
+    embedVar9.add_field(name="!cooking or !cook or !food", value= "Show Top Guilds in Cooking (From Top 60,000 players)" , inline=False)
+    embedVar9.add_field(name="!total or !totalxp", value= "Show Top Guilds in Total XP (From Top 60,000 players)" , inline=False)
+    embedVar9.add_field(name="!all or !overall or !ranking", value= "Show an Overall Leaderboard (From Top 60,000 players)" , inline=False)
+    embedVar9.add_field(name="!guildlb or !glb or !guildboard", value= "Show The Leaderboard of a Guild in a Skill (From Top 60,000 players)\n !guildlb {skill name} {guild tag}" , inline=False)
+    embedVar9.add_field(name="!guildlbT or !glbT or !guildboardT", value= "Show The Leaderboard of a Guild in Total XP (From Top 60,000 players)\n !guildlbT {guild tag}" , inline=False)
     embedVar9.add_field(name="!guildcount or !gc or !count or !howmany or !hm", value= "Show The Members of a Guilds in a Certain Range \n !counter {guild tag} {Search Range}" , inline=False)
     embedVar9.add_field(name="!date", value= "Show Today Date" , inline=False)
     embedVar9.add_field(name="!help or !help? or !helpme or !commands?", value= "Show  This Menu" , inline=False)
