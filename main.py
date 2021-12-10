@@ -192,7 +192,7 @@ def rankk (rank):
 
 def get_tasks(session,skill_name):
     tasks = []
-    for k in range(0,1000):  
+    for k in range(0,3000):  
         url='https://www.curseofaros.com/highscores'
         tasks.append(asyncio.create_task(session.get(url+skill_name+'.json?p='+str(k))))
     return tasks
@@ -205,7 +205,7 @@ def get_tasks2(session,skill_name,limit):
 
 def get_tasks3(session,skill_name):
     tasks = []
-    for k in range(0,2000):  
+    for k in range(0,3000):  
         url='https://www.curseofaros.com/highscores'
         tasks.append((k,asyncio.create_task(session.get(url+skill_name+'.json?p='+str(k)))))
     return tasks
