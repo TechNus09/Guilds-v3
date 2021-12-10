@@ -210,9 +210,9 @@ def get_tasks3(session,skill_name):
         tasks.append((k,asyncio.create_task(session.get(url+skill_name+'.json?p='+str(k)))))
     return tasks
 
-owo_members=()
-members_list=()
-skill_xp=(combat_xp,mining_xp,smithing_xp,woodcutting_xp,crafting_xp,fishing_xp,cooking_xp)
+owo_members=[]
+members_list=[]
+skill_xp=['combat_xp','mining_xp','smithing_xp','woodcutting_xp','crafting_xp','fishing_xp','cooking_xp']
 member_templete={'member_name':'name_expml' ,'combat_xp':0 ,'mining_xp':0 ,'smithing_xp':0 ,'woodcutting_xp':0 ,'crafting_xp':0 ,'fishing_xp':0 ,'cooking_xp':0 }
 
 async def set_init():
