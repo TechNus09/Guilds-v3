@@ -203,6 +203,38 @@ def get_tasks2(session,skill_name,limit):
         tasks.append(asyncio.create_task(session.get(url+skill_name+'.json?p='+str(k))))
     return tasks
 
+def get_tasks3(session,skill_name):
+    tasks = []
+    for k in range(0,2000):  
+        url='https://www.curseofaros.com/highscores'
+        tasks.append((k,asyncio.create_task(session.get(url+skill_name+'.json?p='+str(k)))))
+    return tasks
+
+async def searchtag(skill_name):
+    start = time.time()
+    members_sorted = []
+    guildreg_names = {}
+    guildreg_ranks = {}
+    async with aiohttp.ClientSession() as session:
+        to_do_task = get_tasks3(session,skill_name)
+        responses = await asyncio.gather(*to_do)
+        for response in responses:
+            fdata = await response.json()
+            for i in range(0,20): 
+                #check names get rank
+                #player_rank = 20 * k + i + 1
+                player_name = fdata[i]["name"]
+                xp = fdata[i]["xp"]
+                tag = player_name.split()[0]
+                tag = tag.upper()
+                if tag == 'OWO
+                    
+                    guildreg_names[player_name]=xp
+                    #guildreg_ranks[player_name]=player_rank
+                    continue
+
+
+##############################################################################
 #get guild members rankings in a certain skill (20000)    
 async def searchtag(skill_name,guildtag):
     start = time.time()
