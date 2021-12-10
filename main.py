@@ -240,7 +240,7 @@ async def set_init():
                         else:
                             members_list.append(player_name)
                             owo_member_temp=member_templete
-                            owo_member_temp[member_name]=player_name
+                            owo_member_temp['member_name']=player_name
                             owo_member_temp[skill_xp[x]]=xp
                             owo_members.append(owo_member_temp)
                             continue
