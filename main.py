@@ -244,20 +244,6 @@ async def set_init():
                             owo_members.append(owo_member_temp)
                             continue
         x=x+1 
-        
-        
-"""
-    temp_dic = {k: v for k, v in sorted(guildreg.items(), key=lambda item: item[1],reverse=True)}
-    members_sorted.clear()
-    for key, value in temp_dic.items():
-        test = key + " -- " + "{:,}".format(value)
-        members_sorted.append(test)
-    mini_list = []
-    for i in range(len(members_sorted)):
-        mini_list.append(members_sorted[i])
-    members_sorted.clear()
-    temp_dic = {}
-"""
     end = time.time()
     total_time = end - start
     return owo_members, total_time
