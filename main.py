@@ -550,8 +550,9 @@ async def dc(ctx):
 async def date(ctx):
     d1 = dt.today().strftime("%d/%m/%Y")
     await ctx.send(f'Today is : {d1}')
+
 @bot.command()
-async def get_list(ctx):
+async def getlist(ctx):
     await ctx.send('getting init members xp')
     list = set_init()
     await ctx.send(list)
