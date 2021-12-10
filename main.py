@@ -238,7 +238,7 @@ async def set_init():
                             owo_members[order][skill_xp[x]]=xp
                             continue
                         else:
-                            member_list.append(player_name)
+                            members_list.append(player_name)
                             owo_member_temp=member_templete
                             owo_member_temp[member_name]=player_ame
                             owo_member_temp[skill_xp[x]]=xp
