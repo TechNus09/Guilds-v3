@@ -541,7 +541,7 @@ async def date(ctx):
 @bot.command()
 async def getlist(ctx):
     await ctx.send('getting init members xp')
-    list = set_init()
+    await list = set_init()
     await ctx.send(list)
 
 
