@@ -541,8 +541,12 @@ async def date(ctx):
 @bot.command()
 async def getlist(ctx):
     await ctx.send('getting init members xp')
-    await list = set_init()
-    await ctx.send(list)
+    list = set_init()
+    a = asyncio.run(list)
+    members_xp_list = a[0]
+    time_taken = a[1]
+    await ctx.send(members_xp_list)
+    await ctx.send(f'time taken {time_taken}')
 
 
 @bot.command(name='combat',aliases=['melee','sw','silent'])
