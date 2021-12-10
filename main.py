@@ -215,7 +215,7 @@ members_list=()
 skill_xp=(combat_xp,mining_xp,smithing_xp,woodcutting_xp,crafting_xp,fishing_xp,cooking_xp)
 member_templete={'member_name':'name_expml' ,'combat_xp':0 ,'mining_xp':0 ,'smithing_xp':0 ,'woodcutting_xp':0 ,'crafting_xp':0 ,'fishing_xp':0 ,'cooking_xp':0 }
 
-async def set_init:
+async def set_init():
     start = time.time()
     members_sorted = []
     guildreg = {}
