@@ -210,28 +210,56 @@ def get_tasks3(session,skill_name):
         tasks.append((k,asyncio.create_task(session.get(url+skill_name+'.json?p='+str(k)))))
     return tasks
 
-async def searchtag(skill_name):
+owo_members=()
+members_list=()
+skill_xp=(combat_xp,mining_xp,smithing_xp,woodcutting_xp,crafting_xp,fishing_xp,cooking_xp)
+member_templete={'member_name':'name_expml' ;'combat_xp':0;'mining_xp':0 ;'smithing_xp':0 ;'woodcutting_xp':0 ;'crafting_xp':0 ;'fishing_xp':0 ;'cooking_xp':0 }
+
+async def set_init:
     start = time.time()
     members_sorted = []
-    guildreg_names = {}
-    guildreg_ranks = {}
-    async with aiohttp.ClientSession() as session:
-        to_do_task = get_tasks3(session,skill_name)
-        responses = await asyncio.gather(*to_do)
-        for response in responses:
-            fdata = await response.json()
-            for i in range(0,20): 
-                #check names get rank
-                #player_rank = 20 * k + i + 1
-                player_name = fdata[i]["name"]
-                xp = fdata[i]["xp"]
-                tag = player_name.split()[0]
-                tag = tag.upper()
-                if tag == 'OWO
+    guildreg = {}
+    x=0
+    for skill_name in skill :
+        async with aiohttp.ClientSession() as session:
+            to_do = get_tasks(session,skill_name)
+            responses = await asyncio.gather(*to_do)
+            for response in responses:
+                fdata = await response.json()
+                for i in range(0,20):
+                    player_name = fdata[i]["name"]
+                    xp = fdata[i]["xp"]
+                    tag = player_name.split()[0]
+                    tag = tag.upper()
                     
-                    guildreg_names[player_name]=xp
-                    #guildreg_ranks[player_name]=player_rank
-                    continue
+                    if tag == 'OWO':
+                        if player_name in members_list :
+                            order = members_list.index(player_name)
+                            owo_members[order][skill_xp[x]]=xp
+                            continue
+                        else:
+                            owo_member_temp=member_templete
+                            owo_member_temp[player_name]=name
+                            owo_member_temp[skill_xp[x]]=xp
+                            owo_members.append(owo_member_temp)
+                            continue
+        x=x+1 
+        
+        
+  """
+    temp_dic = {k: v for k, v in sorted(guildreg.items(), key=lambda item: item[1],reverse=True)}
+    members_sorted.clear()
+    for key, value in temp_dic.items():
+        test = key + " -- " + "{:,}".format(value)
+        members_sorted.append(test)
+    mini_list = []
+    for i in range(len(members_sorted)):
+        mini_list.append(members_sorted[i])
+    members_sorted.clear()
+    temp_dic = {}"""
+    end = time.time()
+    total_time = end - start
+    return owo_members, total_time
 
 
 ##############################################################################
@@ -491,6 +519,7 @@ async def on_ready():
 @bot.command()
 async def ping(ctx):
     await ctx.send(f"Pong! {round(bot.latency * 1000)}ms")
+
     
 
 
@@ -521,6 +550,11 @@ async def dc(ctx):
 async def date(ctx):
     d1 = dt.today().strftime("%d/%m/%Y")
     await ctx.send(f'Today is : {d1}')
+@bot.command()
+async def get_list(ctx):
+    await ctx.send('getting init members xp')
+    list = set_init()
+    await ctx.send(list)
 
 
 @bot.command(name='combat',aliases=['melee','sw','silent'])
