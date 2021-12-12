@@ -12,6 +12,8 @@ import nest_asyncio
 import time
 import aiohttp
 
+from logs import members_log, members_list, unsorted_lb, skills_names_list, skills_xp_list
+
 
 nest_asyncio.apply()
 
@@ -134,6 +136,51 @@ lvldef = [46, 53, 60, 70, 80, 92, 106, 121, 140, 160, 184, 212, 243, 280, 321, 3
 ###############################################################################################################################################################################
 
 
+
+
+
+
+
+async def SearchEvent(skill_name):
+    start = time.time()
+    namelist = members_list
+    log_file = members_logs
+    unsorted_l = unsorted_lb
+    skills_list = skills_names_list
+    skills_xp = skills_xp_list 
+    sorted_lb ={}
+    
+    async with aiohttp.ClientSession() as session:
+        to_do = get_tasks(session,skill_name)
+        responses = await asyncio.gather(*to_do)
+        for response in responses:
+            fdata = await response.json()
+            for i in range(0,20):
+                player_name = fdata[i]["name"]
+                xp = fdata[i]["xp"]
+                if player_name in namelist :
+                    name_order = namelist.index(player_name)
+                    skill_order = skills_list.index(skill_name)
+                    old_xp = log_file[name_order][skills_xp[skill_order]]
+                    new_xp = xp
+                    xp_diff = old_xp - new_xp
+                    unsorted_l[player_name] = xp_diff
+                    continue
+                else:
+                    continue
+    temp_dic = {k: v for k, v in sorted(unsorted_l.items(), key=lambda item: item[1],reverse=True)}
+    members_sorted.clear()
+    for key, value in temp_dic.items():
+        test = key + " -- " + "{:,}".format(value)
+        members_sorted.append(test)
+    mini_list = []
+    for i in range(len(members_sorted)):
+        mini_list.append(members_sorted[i])
+    members_sorted.clear()
+    temp_dic = {}
+    end = time.time()
+    total_time = end - start
+    return mini_list, total_time
 
 
 ######################################################################Bot_Funtctions##################################################################################        
