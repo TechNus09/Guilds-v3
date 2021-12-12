@@ -300,7 +300,7 @@ async def SearchEvent(skill_name):
     skills_list = skills_names_list
     skills_xp = skills_xp_list 
     sorted_lb ={}
-    global temp_dic ={}
+    temp_dic = {}
     members_sorted = []
     skill_x = skills_list.index(skill_name)
     async with aiohttp.ClientSession() as session:
