@@ -613,7 +613,7 @@ async def event(ctx,skill_name):
         await ctx.send(lb)
         await ctx.send(f'time taken : {time_taken}')
     else:
-        await ctx.send("unkown skill, please check spelling"): 
+        await ctx.send("unkown skill, please check spelling") 
 
 
 
