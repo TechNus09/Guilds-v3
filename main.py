@@ -611,12 +611,13 @@ async def event(ctx,skill_name):
         time_taken = a[1]
         lb1 = ""
         lb2 = ""
+        lb_size = Len(lb_list)
         await ctx.send(f"{skill_name_c} LeaderBoard")
-        for player in range(56):
+        for player in range(lb_size // 2):
             lb1 = lb1 + "Rank#"+str(player+1) +'\n'+ lb_list[player] + '\n'
         await ctx.send(lb1)
 
-        for player in range(56,111):
+        for player in range((lb_size//2)+1,lb_size):
             lb2 = lb2 + "Rank#"+str(player+1) +'\n'+ lb_list[player] + '\n'
         await ctx.send(lb2)
 
