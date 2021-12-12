@@ -602,7 +602,7 @@ async def getlist(ctx):
 @bot.command()
 async def event(ctx,skill_name):
     skill_n_l = skills_names_list
-    if skill_name in skills_n_l:
+    if skill_name in skill_n_l:
         a = asyncio.run(SearchEvent(skill_name))
         lb_list = a[0]
         time_taken = a[1]
