@@ -285,6 +285,7 @@ async def SearchEvent(skill_name):
     start = time.time()
     namelist = members_list
     log_file = members_log
+"""
     unsorted_l = {'OwO Silent': 0, 'OwO TheDuck': 0, 'OwO Mirage': 0, 'OwO Thor': 0, 'OwO DaveDust': 0, 'OwO Tempy': 0, 'OwO Tantrid': 0, 'OwO Smith': 0, 'OwO Freaka': 0, 'OwO DirtyShots': 0, 
     'OwO h0lka': 0, 'OwO TheWitcher': 0, 'OwO Krieger': 0, 'OwO Dryness': 0, 'OwO Salty': 0, 'OwO TJ': 0, 'OwO Spooniest': 0, 'OwO DarkSecret': 0, 'OwO Moist': 0, 'OwO Matt': 0, 'OwO Aeonic': 0, 
     'OwO Olive Yew': 0, 'OwO KcAlex': 0, 'OwO Messwithme': 0, 'OwO CromacK': 0, 'OwO Kreat': 0, 'OwO Cerez Jr': 0, 'OwO DigiPope': 0, 'OwO Roy Donk': 0, 'OwO Maxxd': 0, 'OwO Heartman': 0,
@@ -296,7 +297,8 @@ async def SearchEvent(skill_name):
     'OwO Doody': 0, 'OwO Skaifox': 0, 'OwO Aurora': 0, 'OwO Smiley': 0, 'OwO Redro': 0, 'OWO Sriddec': 0, 'OwO Bank': 0, 'OwO CromacK Jr': 0, 'OwO AJ': 0, 'OwO MessEh': 0, 'OwO Zoidberg': 0, 
     'OwO Goat Bank': 0, 'OwO GaRgAmEL': 0, 'OwO Tasty': 0, 'OwO Hnngh': 0, 'OwO Lonely': 0, 'OwO Fake User': 0, 'OwO Life': 0, 'OwO Uncloud': 0, 'OwO goout': 0, 'OwO tanttwat': 0, 'OwO The Hungry': 0, 
     'OwO Senpaii': 0, 'OwO Nightmare': 0}
-
+"""
+    
     skills_list = skills_names_list
     skills_xp = skills_xp_list 
     sorted_lb ={}
@@ -304,6 +306,7 @@ async def SearchEvent(skill_name):
     members_sorted = []
     skill_x = skills_list.index(skill_name)
     async with aiohttp.ClientSession() as session:
+        unsorted = {}
         to_do = get_tasks(session,skill[skill_x])
         responses = await asyncio.gather(*to_do)
         for response in responses:
@@ -317,11 +320,11 @@ async def SearchEvent(skill_name):
                     old_xp = log_file[name_order][skill_x]
                     new_xp = xp
                     xp_diff = new_xp - old_xp
-                    unsorted_l |= {player_name:xp_diff}
+                    unsorted |= {player_name:xp_diff}
                     continue
                 else:
                     continue
-        temp_dic = {k: v for k, v in sorted(unsorted_l.items(), key=lambda item: item[1],reverse=True)}
+        temp_dic = {k: v for k, v in sorted(unsorted.items(), key=lambda item: item[1],reverse=True)}
     members_sorted.clear()
     for key, value in temp_dic.items():
         test = key + " -- " + "{:,}".format(value)
