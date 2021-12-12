@@ -316,7 +316,7 @@ async def SearchEvent(skill_name):
                 tag = tag.upper()
                 if tag == "OWO" :
                     name_order = namelist.index(player_name)
-                    old_xp = log_file[name_order][skill_x]
+                    old_xp = log_file[name_order][skills_xp[skill_x]]
                     new_xp = xp
                     xp_diff = new_xp - old_xp
                     unsortedl[player_name] = xp_diff
