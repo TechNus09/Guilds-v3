@@ -138,7 +138,7 @@ members_log= [
 ,{'member_name': 'OwO Thor', 'combat_xp': 1683161651, 'mining_xp': 146755113, 'smithing_xp': 71685688, 'woodcutting_xp': 153284740, 'crafting_xp': 82607529, 'fishing_xp': 72092275, 'cooking_xp': 84832115}
 ,{'member_name': 'OwO DaveDust', 'combat_xp': 1302727611, 'mining_xp': 39758525, 'smithing_xp': 35863055, 'woodcutting_xp': 54285760, 'crafting_xp': 42346404, 'fishing_xp': 360672865, 'cooking_xp': 305686845}
 ,{'member_name': 'OwO Tempy', 'combat_xp': 1283220108, 'mining_xp': 12184195, 'smithing_xp': 14432547, 'woodcutting_xp': 20410260, 'crafting_xp': 13887705, 'fishing_xp': 0, 'cooking_xp': 0}
-,{'member_name': 'OwO Tantrid', 'combat_xp': 1194593053, 'mining_xp': 285136798, 'smithing_xp': 674936361, 'woodcutting_xp': 283527964, 'crafting_xp': 331371229, 'fishing_xp': 4536153492, 'c=ooking_xp': 4536153492}
+,{'member_name': 'OwO Tantrid', 'combat_xp': 1194593053, 'mining_xp': 285136798, 'smithing_xp': 674936361, 'woodcutting_xp': 283527964, 'crafting_xp': 331371229, 'fishing_xp': 4536153492, 'cooking_xp': 4536153492}
 ,{'member_name': 'OwO Smith', 'combat_xp': 1184124500, 'mining_xp': 87527718, 'smithing_xp': 36477810, 'woodcutting_xp': 44205515, 'crafting_xp': 18187330, 'fishing_xp': 21304150, 'cooking_xp': 1319520}
 ,{'member_name': 'OwO Freaka', 'combat_xp': 1037575033, 'mining_xp': 171178150, 'smithing_xp': 325929952, 'woodcutting_xp': 246859245, 'crafting_xp': 215101770, 'fishing_xp': 615519105, 'cooking_xp': 434823380}
 ,{'member_name': 'OwO DirtyShots', 'combat_xp': 987237472, 'mining_xp': 667773401, 'smithing_xp': 342313218, 'woodcutting_xp': 511729755, 'crafting_xp': 289025531, 'fishing_xp': 862342950, 'cooking_xp': 519790370}
