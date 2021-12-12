@@ -763,7 +763,8 @@ async def event(ctx,skill_name):
     else:
         await ctx.send("unkown skill, please check spelling") 
 @bot.command()
-async def lb(ctx,test,xp):
+async def lb(ctx,test1,test2,xp):
+    test = test1 + ' ' + test2
     dic = {str(test):int(xp)}
     unsorted_lb |= dic 
     msg = f'{test} been added'
