@@ -285,20 +285,6 @@ async def SearchEvent(skill_name):
     start = time.time()
     namelist = members_list
     log_file = members_log
-"""
-    unsorted_l = {'OwO Silent': 0, 'OwO TheDuck': 0, 'OwO Mirage': 0, 'OwO Thor': 0, 'OwO DaveDust': 0, 'OwO Tempy': 0, 'OwO Tantrid': 0, 'OwO Smith': 0, 'OwO Freaka': 0, 'OwO DirtyShots': 0, 
-    'OwO h0lka': 0, 'OwO TheWitcher': 0, 'OwO Krieger': 0, 'OwO Dryness': 0, 'OwO Salty': 0, 'OwO TJ': 0, 'OwO Spooniest': 0, 'OwO DarkSecret': 0, 'OwO Moist': 0, 'OwO Matt': 0, 'OwO Aeonic': 0, 
-    'OwO Olive Yew': 0, 'OwO KcAlex': 0, 'OwO Messwithme': 0, 'OwO CromacK': 0, 'OwO Kreat': 0, 'OwO Cerez Jr': 0, 'OwO DigiPope': 0, 'OwO Roy Donk': 0, 'OwO Maxxd': 0, 'OwO Heartman': 0,
-    'OwO MrBrisingr': 0, 'OwO Yekzer': 0, 'OwO Bucketss': 0, 'OwO Crixal': 0, 'OwO Panda': 0, 'OwO AnimeHDD': 0, 'OwO RunPerge': 0, 'OwO TechNus09': 0, 'OwO Titan': 0, 'OwO Mullet': 0, 'OwO Yec': 0,
-    'OwO AcePar': 0, 'OwO Rage': 0, 'OwO Dzoga': 0, 'OwO Skitter': 0, 'OwO Cool Adam': 0, 'OwO Jaf': 0, 'OwO Maddy': 0, 'OwO Hentai': 0, 'OwO Scarthach': 0, 'OwO SAVYS': 0, 'OwO Bunkie': 0, 
-    'OwO Senku': 0, 'OwO Doony': 0, 'OwO J Sins': 0, 'OwO PUZZLE': 0, 'OwO Crusha': 0, 'OwO John': 0, 'OwO Dribbyl': 0, 'OwO Pabs': 0, 'OwO Chez': 0, 'OwO Birb': 0, 'OwO DaddyShark': 0, 'OwO Xbl': 0,
-    'OwO Gage': 0, 'OwO Avi': 0, 'OwO l Derek l': 0, 'OwO PeeterIV': 0, 'OwO Shadow': 0, 'OwO Schnee': 0, 'OwO Buttcrack': 0, 'OwO DummyThicc': 0, 'OwO Necrotic': 0, 'OwO Stoned': 0, 'OwO Tzak': 0,
-    'OwO Kona': 0, 'OwO Glitchy': 0, 'OwO Bighhhh': 0, 'OwO White': 0, 'OwO SeikoYuki': 0, 'OwO Mr Yusuf': 0, 'OwO ryry': 0, 'OwO Durps': 0, 'OwO KaitoZezo': 0, 'OwO Bowl': 0, 'OwO Vick Vega': 0, 
-    'OwO Doody': 0, 'OwO Skaifox': 0, 'OwO Aurora': 0, 'OwO Smiley': 0, 'OwO Redro': 0, 'OWO Sriddec': 0, 'OwO Bank': 0, 'OwO CromacK Jr': 0, 'OwO AJ': 0, 'OwO MessEh': 0, 'OwO Zoidberg': 0, 
-    'OwO Goat Bank': 0, 'OwO GaRgAmEL': 0, 'OwO Tasty': 0, 'OwO Hnngh': 0, 'OwO Lonely': 0, 'OwO Fake User': 0, 'OwO Life': 0, 'OwO Uncloud': 0, 'OwO goout': 0, 'OwO tanttwat': 0, 'OwO The Hungry': 0, 
-    'OwO Senpaii': 0, 'OwO Nightmare': 0}
-"""
-    
     skills_list = skills_names_list
     skills_xp = skills_xp_list 
     sorted_lb ={}
