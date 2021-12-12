@@ -151,7 +151,7 @@ async def SearchEvent(skill_name):
     sorted_lb ={}
     skill_x = skills.index(skill_name)
     async with aiohttp.ClientSession() as session:
-        to_do = get_tasks(session,skill_x)
+        to_do = get_tasks(session,skill[skill_x])
         responses = await asyncio.gather(*to_do)
         for response in responses:
             fdata = await response.json()
@@ -603,12 +603,13 @@ async def getlist(ctx):
 async def event(ctx,skill_name):
     skill_n_l = skills_names_list
     if skill_name in skill_n_l:
-        await ctx.send(f"Fetching {skill_name} Data ...")
+        skill_name_c = skill_name.capatilize()
+        await ctx.send(f"Fetching {skill_name_c} Data ...")
         a = asyncio.run(SearchEvent(skill_name))
         lb_list = a[0]
         time_taken = a[1]
         lb = ""
-        await ctx.send(f"{skill_name} LeaderBoard")
+        await ctx.send(f"{skill_name_c} LeaderBoard")
         for player in range(111):
             lb = lb + "Rank#"+str(player+1) +'\n'+ lb_list[player] + '\n'
         await ctx.send(lb)
