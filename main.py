@@ -586,6 +586,7 @@ async def date(ctx):
     d1 = dt.today().strftime("%d/%m/%Y")
     await ctx.send(f'Today is : {d1}')
 
+"""
 @bot.command()
 async def getlist(ctx):
     await ctx.send('getting init members xp')
@@ -596,6 +597,24 @@ async def getlist(ctx):
     for i in range(len(members_xp_list)):
         await ctx.send(members_xp_list[i])
     await ctx.send(f'time taken {time_taken}')
+"""
+
+@bot.command()
+async def event(ctx,skill_name):
+    skill_n_l = skills_names_list
+    if skill_name in skills_n_l:
+        a = asyncio.run(SearchEvent(skill_name))
+        lb_list = a[0]
+        time_taken = a[1]
+        lb = ""
+        await ctx.send(f"{skill_name} LeaderBoard")
+        for player in range(111):
+            lb = lb + "Rank#"+str(player+1) +'\n'+ lb_list[player] + '\n'
+        await ctx.send(lb)
+        await ctx.send(f'time taken : {time_taken}')
+    else:
+        await ctx.send("unkown skill, please check spelling"): 
+
 
 
 @bot.command(name='combat',aliases=['melee','sw','silent'])
