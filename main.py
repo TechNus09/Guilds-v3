@@ -266,6 +266,7 @@ unsorted_lb = {'OwO Silent': 0, 'OwO TheDuck': 0, 'OwO Mirage': 0, 'OwO Thor': 0
 'OwO Doody': 0, 'OwO Skaifox': 0, 'OwO Aurora': 0, 'OwO Smiley': 0, 'OwO Redro': 0, 'OWO Sriddec': 0, 'OwO Bank': 0, 'OwO CromacK Jr': 0, 'OwO AJ': 0, 'OwO MessEh': 0, 'OwO Zoidberg': 0, 
 'OwO Goat Bank': 0, 'OwO GaRgAmEL': 0, 'OwO Tasty': 0, 'OwO Hnngh': 0, 'OwO Lonely': 0, 'OwO Fake User': 0, 'OwO Life': 0, 'OwO Uncloud': 0, 'OwO goout': 0, 'OwO tanttwat': 0, 'OwO The Hungry': 0, 
 'OwO Senpaii': 0, 'OwO Nightmare': 0}
+
 skills_names_list = ['combat','mining','smithing','woodcutting','crafting','fishing','cooking']
 
 skills_xp_list = ['combat_xp','mining_xp','smithing_xp','woodcutting_xp','crafting_xp','fishing_xp','cooking_xp']
@@ -281,12 +282,22 @@ skills_xp_list = ['combat_xp','mining_xp','smithing_xp','woodcutting_xp','crafti
 
 async def SearchEvent(skill_name):
     global members_log, members_list, unsorted_lb
-    global skills_names_list, skills_xp_list
+    
     start = time.time()
-    namelist = members_list
+    namelist = ['OwO Silent', 'OwO TheDuck', 'OwO Mirage', 'OwO Thor', 'OwO DaveDust', 'OwO Tempy', 'OwO Tantrid', 'OwO Smith', 'OwO Freaka', 'OwO DirtyShots', 'OwO h0lka',
+    'OwO TheWitcher', 'OwO Krieger', 'OwO Dryness', 'OwO Salty', 'OwO TJ', 'OwO Spooniest', 'OwO DarkSecret', 'OwO Moist', 'OwO Matt', 'OwO Aeonic', 'OwO Olive Yew', 'OwO KcAlex',
+    'OwO Messwithme', 'OwO CromacK', 'OwO Kreat', 'OwO Cerez Jr', 'OwO DigiPope', 'OwO Roy Donk', 'OwO Maxxd', 'OwO Heartman', 'OwO MrBrisingr', 'OwO Yekzer', 'OwO Bucketss',
+    'OwO Crixal', 'OwO Panda', 'OwO AnimeHDD', 'OwO RunPerge', 'OwO TechNus09', 'OwO Titan', 'OwO Mullet', 'OwO Yec', 'OwO AcePar', 'OwO Rage', 'OwO Dzoga', 'OwO Skitter',
+    'OwO Cool Adam', 'OwO Jaf', 'OwO Maddy', 'OwO Hentai', 'OwO Scarthach', 'OwO SAVYS', 'OwO Bunkie', 'OwO Senku', 'OwO Doony', 'OwO J Sins', 'OwO PUZZLE', 'OwO Crusha',
+    'OwO John', 'OwO Dribbyl', 'OwO Pabs', 'OwO Chez', 'OwO Birb', 'OwO DaddyShark', 'OwO Xbl', 'OwO Gage', 'OwO Avi', 'OwO l Derek l', 'OwO PeeterIV', 'OwO Shadow', 'OwO Schnee',
+    'OwO Buttcrack', 'OwO DummyThicc', 'OwO Necrotic', 'OwO Stoned', 'OwO Tzak', 'OwO Kona', 'OwO Glitchy', 'OwO Bighhhh', 'OwO White', 'OwO SeikoYuki', 'OwO Mr Yusuf', 'OwO ryry',
+    'OwO Durps', 'OwO KaitoZezo', 'OwO Bowl', 'OwO Vick Vega', 'OwO Doody', 'OwO Skaifox', 'OwO Aurora', 'OwO Smiley', 'OwO Redro', 'OWO Sriddec', 'OwO Bank', 'OwO CromacK Jr', 'OwO AJ',
+    'OwO MessEh', 'OwO Zoidberg', 'OwO Goat Bank', 'OwO GaRgAmEL', 'OwO Tasty', 'OwO Hnngh', 'OwO Lonely', 'OwO Fake User', 'OwO Life', 'OwO Uncloud', 'OwO goout', 'OwO tanttwat',
+    'OwO The Hungry', 'OwO Senpaii', 'OwO Nightmare']
+
     log_file = members_log
     skills_list = skills_names_list
-    skills_xp = skills_xp_list 
+    skills_xp = skills_xp_list
     sorted_lb ={}
     temp_dic = {}
     members_sorted = []
@@ -305,7 +316,6 @@ async def SearchEvent(skill_name):
                 tag = tag.upper()
                 if tag == "OWO" :
                     name_order = namelist.index(player_name)
-                    skill_order = skills_list.index(skill_name)
                     old_xp = log_file[name_order][skill_x]
                     new_xp = xp
                     xp_diff = new_xp - old_xp
