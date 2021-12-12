@@ -762,6 +762,25 @@ async def event(ctx,skill_name):
         await ctx.send(f'time taken : {time_taken}')
     else:
         await ctx.send("unkown skill, please check spelling") 
+@bot.command()
+async def lb(ctx,test,xp):
+    dic = {str(test):int(xp)}
+    await unsorted_lb |= dic 
+@bot.command()
+async def show(ctx):
+    lb = []
+    DictToList(unsorted_lb,lb)
+    lb1 = ""
+    lb2 = ""
+    lb_size = len(lb)
+    await ctx.send(f"LeaderBoard")
+    for player in range(lb_size // 2):
+        lb1 = lb1 + "Rank#"+str(player+1) +'\n'+ lb[player] + '\n'
+    await ctx.send(lb1)
+
+    for player in range((lb_size//2)+1,lb_size):
+        lb2 = lb2 + "Rank#"+str(player+1) +'\n'+ lb[player] + '\n'
+    await ctx.send(lb2)
 
 
 
