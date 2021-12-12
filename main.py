@@ -764,6 +764,7 @@ async def event(ctx,skill_name):
         await ctx.send("unkown skill, please check spelling") 
 @bot.command()
 async def lb(ctx,test1,test2,xp):
+    global unsorted_lb
     test = test1 + ' ' + test2
     dic = {str(test):int(xp)}
     unsorted_lb |= dic 
@@ -771,6 +772,7 @@ async def lb(ctx,test1,test2,xp):
     await ctx.send(msg)
 @bot.command()
 async def show(ctx):
+    global unsorted_lb
     lb = []
     DictToList(unsorted_lb,lb)
     lb1 = ""
