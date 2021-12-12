@@ -603,7 +603,7 @@ async def getlist(ctx):
 async def event(ctx,skill_name):
     skill_n_l = skills_names_list
     if skill_name in skill_n_l:
-        skill_name_c = skill_name.capatilize()
+        skill_name_c = skill_name.capitalize()
         await ctx.send(f"Fetching {skill_name_c} Data ...")
         a = asyncio.run(SearchEvent(skill_name))
         lb_list = a[0]
