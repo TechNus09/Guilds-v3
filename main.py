@@ -307,7 +307,6 @@ async def SearchEvent(skill_name):
                     new_xp = xp
                     xp_diff = new_xp - old_xp
                     unsorted |= {player_name:1111
-                else:
                     continue
         temp_dic = {k: v for k, v in sorted(unsorted.items(), key=lambda item: item[1],reverse=True)}
     members_sorted.clear()
