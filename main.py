@@ -765,7 +765,9 @@ async def event(ctx,skill_name):
 @bot.command()
 async def lb(ctx,test,xp):
     dic = {str(test):int(xp)}
-    await unsorted_lb |= dic 
+    unsorted_lb |= dic 
+    msg = f'{test} been added'
+    await ctx.send(msg)
 @bot.command()
 async def show(ctx):
     lb = []
