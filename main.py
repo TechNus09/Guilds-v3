@@ -303,7 +303,7 @@ async def SearchEvent(skill_name):
                 xp = fdata[i]["xp"]
                 tag = player_name.split()[0]
                 tag = tag.upper()
-                if tag == "OWO :
+                if tag == "OWO" :
                     name_order = namelist.index(player_name)
                     skill_order = skills_list.index(skill_name)
                     old_xp = log_file[name_order][skill_x]
