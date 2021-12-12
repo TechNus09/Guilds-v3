@@ -280,6 +280,8 @@ skills_xp_list = ['combat_xp','mining_xp','smithing_xp','woodcutting_xp','crafti
 
 
 async def SearchEvent(skill_name):
+    global members_log, members_list, unsorted_lb
+    global skills_names_list, skills_xp_list
     start = time.time()
     namelist = members_list
     log_file = members_log
@@ -288,7 +290,7 @@ async def SearchEvent(skill_name):
     skills_xp = skills_xp_list 
     sorted_lb ={}
     members_sorted = []
-    skill_x = skills.index(skill_name)
+    skill_x = skills_list.index(skill_name)
     async with aiohttp.ClientSession() as session:
         to_do = get_tasks(session,skill[skill_x])
         responses = await asyncio.gather(*to_do)
