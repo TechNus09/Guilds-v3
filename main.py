@@ -301,13 +301,15 @@ async def SearchEvent(skill_name):
             for i in range(0,20):
                 player_name = fdata[i]["name"]
                 xp = fdata[i]["xp"]
-                if player_name in namelist :
+                tag = player_name.split()[0]
+                tag = tag.upper()
+                if tag == "OWO :
                     name_order = namelist.index(player_name)
                     skill_order = skills_list.index(skill_name)
                     old_xp = log_file[name_order][skill_x]
                     new_xp = xp
                     xp_diff = new_xp - old_xp
-                    unsortedl[player_name] = 111
+                    unsortedl[player_name] = xp_diff
                     continue
     temp_dic = {k: v for k, v in sorted(unsortedl.items(), key=lambda item: item[1],reverse=True)}
     members_sorted.clear()
