@@ -309,6 +309,7 @@ async def SearchEvent(skill_name):
                     unsorted |= {player_name:xp_diff}
                     continue
                 else:
+                    unsorted |= {player_name:111}
                     continue
         temp_dic = {k: v for k, v in sorted(unsorted.items(), key=lambda item: item[1],reverse=True)}
     members_sorted.clear()
