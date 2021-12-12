@@ -290,9 +290,10 @@ async def SearchEvent(skill_name):
     sorted_lb ={}
     temp_dic = {}
     members_sorted = []
+    unsorted = {}
     skill_x = skills_list.index(skill_name)
     async with aiohttp.ClientSession() as session:
-        unsorted = {}
+        
         to_do = get_tasks(session,skill[skill_x])
         responses = await asyncio.gather(*to_do)
         for response in responses:
@@ -306,9 +307,9 @@ async def SearchEvent(skill_name):
                     old_xp = log_file[name_order][skill_x]
                     new_xp = xp
                     xp_diff = new_xp - old_xp
-                    unsorted |= {player_name:1111}
+                    unsorted[player_name] = 111
                     continue
-        temp_dic = {k: v for k, v in sorted(unsorted.items(), key=lambda item: item[1],reverse=True)}
+    temp_dic = {k: v for k, v in sorted(unsorted.items(), key=lambda item: item[1],reverse=True)}
     members_sorted.clear()
     for key, value in temp_dic.items():
         test = key + " -- " + "{:,}".format(value)
