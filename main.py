@@ -149,9 +149,9 @@ async def SearchEvent(skill_name):
     skills_list = skills_names_list
     skills_xp = skills_xp_list 
     sorted_lb ={}
-    
+    skill_x = skills.index(skill_name)
     async with aiohttp.ClientSession() as session:
-        to_do = get_tasks(session,skill_name)
+        to_do = get_tasks(session,skill_x)
         responses = await asyncio.gather(*to_do)
         for response in responses:
             fdata = await response.json()
@@ -603,6 +603,7 @@ async def getlist(ctx):
 async def event(ctx,skill_name):
     skill_n_l = skills_names_list
     if skill_name in skill_n_l:
+        await ctx.send(f"Fetching {skill_name} Data ...")
         a = asyncio.run(SearchEvent(skill_name))
         lb_list = a[0]
         time_taken = a[1]
