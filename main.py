@@ -300,6 +300,7 @@ async def SearchEvent(skill_name):
     skills_list = skills_names_list
     skills_xp = skills_xp_list 
     sorted_lb ={}
+    temp_dic ={}
     members_sorted = []
     skill_x = skills_list.index(skill_name)
     async with aiohttp.ClientSession() as session:
@@ -320,7 +321,7 @@ async def SearchEvent(skill_name):
                     continue
                 else:
                     continue
-    temp_dic = {k: v for k, v in sorted(unsorted_l.items(), key=lambda item: item[1],reverse=True)}
+        temp_dic = {k: v for k, v in sorted(unsorted_l.items(), key=lambda item: item[1],reverse=True)}
     members_sorted.clear()
     for key, value in temp_dic.items():
         test = key + " -- " + "{:,}".format(value)
