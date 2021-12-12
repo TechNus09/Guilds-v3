@@ -290,7 +290,7 @@ async def SearchEvent(skill_name):
     sorted_lb ={}
     temp_dic = {}
     members_sorted = []
-    unsorted = {}
+    unsortedl = {}
     skill_x = skills_list.index(skill_name)
     async with aiohttp.ClientSession() as session:
         
@@ -307,19 +307,16 @@ async def SearchEvent(skill_name):
                     old_xp = log_file[name_order][skill_x]
                     new_xp = xp
                     xp_diff = new_xp - old_xp
-                    unsorted[player_name] = 111
+                    unsortedl[player_name] = 111
                     continue
-    temp_dic = {k: v for k, v in sorted(unsorted.items(), key=lambda item: item[1],reverse=True)}
+    temp_dic = {k: v for k, v in sorted(unsortedl.items(), key=lambda item: item[1],reverse=True)}
     members_sorted.clear()
     for key, value in temp_dic.items():
         test = key + " -- " + "{:,}".format(value)
         members_sorted.append(test)
     mini_list = []
-    for i in range(len(members_sorted)):
-        mini_list.append(members_sorted[i])
-    members_sorted.clear()
+    mini_list = members_sorted
     temp_dic = {}
-    unsorted_l = unsorted_lb
     end = time.time()
     total_time = end - start
     return mini_list, total_time
