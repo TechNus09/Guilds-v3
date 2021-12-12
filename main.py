@@ -149,6 +149,7 @@ async def SearchEvent(skill_name):
     skills_list = skills_names_list
     skills_xp = skills_xp_list 
     sorted_lb ={}
+    members_sorted = []
     skill_x = skills.index(skill_name)
     async with aiohttp.ClientSession() as session:
         to_do = get_tasks(session,skill[skill_x])
