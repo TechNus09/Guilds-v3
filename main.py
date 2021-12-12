@@ -145,7 +145,7 @@ async def SearchEvent(skill_name):
     start = time.time()
     namelist = members_list
     log_file = members_log
-    unsorted_l = unsorted_lb
+    unsorted_l = {} #unsorted_lb
     skills_list = skills_names_list
     skills_xp = skills_xp_list 
     sorted_lb ={}
