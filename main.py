@@ -609,11 +609,17 @@ async def event(ctx,skill_name):
         a = asyncio.run(SearchEvent(skill_name))
         lb_list = a[0]
         time_taken = a[1]
-        lb = ""
+        lb1 = ""
+        lb2 = ""
         await ctx.send(f"{skill_name_c} LeaderBoard")
-        for player in range(111):
-            lb = lb + "Rank#"+str(player+1) +'\n'+ lb_list[player] + '\n'
-        await ctx.send(lb)
+        for player in range(56):
+            lb1 = lb1 + "Rank#"+str(player+1) +'\n'+ lb_list[player] + '\n'
+        await ctx.send(lb1)
+
+        for player in range(56,111):
+            lb2 = lb2 + "Rank#"+str(player+1) +'\n'+ lb_list[player] + '\n'
+        await ctx.send(lb2)
+
         await ctx.send(f'time taken : {time_taken}')
     else:
         await ctx.send("unkown skill, please check spelling") 
