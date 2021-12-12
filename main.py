@@ -324,7 +324,7 @@ async def SearchEvent(skill_name):
     temp_dic = {k: v for k, v in sorted(unsortedl.items(), key=lambda item: item[1],reverse=True)}
     members_sorted.clear()
     for key, value in temp_dic.items():
-        test = key + " -- " + "{:,}".format(value)
+        test = key + " <> " + "{:,}".format(value)
         members_sorted.append(test)
     mini_list = []
     mini_list = members_sorted
