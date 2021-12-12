@@ -165,7 +165,7 @@ async def SearchEvent(skill_name):
                     old_xp = log_file[name_order][skills_xp[skill_order]]
                     new_xp = xp
                     xp_diff = old_xp - new_xp
-                    unsorted_l[player_name] = xp_diff
+                    unsorted_l[player_name] += xp_diff
                     continue
                 else:
                     continue
