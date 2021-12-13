@@ -132,7 +132,7 @@ lvldef = [46, 53, 60, 70, 80, 92, 106, 121, 140, 160, 184, 212, 243, 280, 321, 3
 511189519, 587202560]
 #######################################################
 members_log= [
- {'member_name': 'OwO Cash Money', 'combat_xp'; 0, 'mining_xp': 72217800, 'smithing_xp': 571649872, 'woodcutting_xp': 80374322, 'crafting_xp': 87208852, 'fishing_xp': 380975865, 'cooking_xp': 283624900}
+ {'member_name': 'OwO Cash Money', 'combat_xp': 0, 'mining_xp': 72217800, 'smithing_xp': 571649872, 'woodcutting_xp': 80374322, 'crafting_xp': 87208852, 'fishing_xp': 380975865, 'cooking_xp': 283624900}
 ,{'member_name': 'OwO Silent', 'combat_xp': 4536153492, 'mining_xp': 434930717, 'smithing_xp': 38297515, 'woodcutting_xp': 326025445, 'crafting_xp': 568024172, 'fishing_xp': 494397160, 'cooking_xp': 349145655}
 ,{'member_name': 'OwO TheDuck', 'combat_xp': 2480568998, 'mining_xp': 145858839, 'smithing_xp': 288239664, 'woodcutting_xp': 187076760, 'crafting_xp': 145225480, 'fishing_xp': 988740825, 'cooking_xp': 942283975}
 ,{'member_name': 'OwO Mirage', 'combat_xp': 1998833812, 'mining_xp': 45843639, 'smithing_xp': 37058503, 'woodcutting_xp': 42949750, 'crafting_xp': 28025409, 'fishing_xp': 120849670, 'cooking_xp': 9061805}
