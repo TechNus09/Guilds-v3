@@ -245,7 +245,7 @@ members_log= [
 ,{'member_name': 'OwO Senpaii', 'combat_xp': 0, 'mining_xp': 0, 'smithing_xp': 0, 'woodcutting_xp': 0, 'crafting_xp': 0, 'fishing_xp': 39590, 'cooking_xp': 330}
 ,{'member_name': 'OwO Nightmare', 'combat_xp': 0, 'mining_xp': 0, 'smithing_xp': 0, 'woodcutting_xp': 0, 'crafting_xp': 0, 'fishing_xp': 1230, 'cooking_xp': 0}]
 
-members_list = ['OwO Cash Money', OwO Silent', 'OwO TheDuck', 'OwO Mirage', 'OwO Thor', 'OwO DaveDust', 'OwO Tempy', 'OwO Tantrid', 'OwO Smith', 'OwO Freaka', 'OwO DirtyShots', 'OwO h0lka',
+members_list = ['OwO Cash Money', 'OwO Silent', 'OwO TheDuck', 'OwO Mirage', 'OwO Thor', 'OwO DaveDust', 'OwO Tempy', 'OwO Tantrid', 'OwO Smith', 'OwO Freaka', 'OwO DirtyShots', 'OwO h0lka',
 'OwO TheWitcher', 'OwO Krieger', 'OwO Dryness', 'OwO Salty', 'OwO TJ', 'OwO Spooniest', 'OwO DarkSecret', 'OwO Moist', 'OwO Matt', 'OwO Aeonic', 'OwO Olive Yew', 'OwO KcAlex',
 'OwO Messwithme', 'OwO CromacK', 'OwO Kreat', 'OwO Cerez Jr', 'OwO DigiPope', 'OwO Roy Donk', 'OwO Maxxd', 'OwO Heartman', 'OwO MrBrisingr', 'OwO Yekzer', 'OwO Bucketss',
 'OwO Crixal', 'OwO Panda', 'OwO AnimeHDD', 'OwO RunPerge', 'OwO TechNus09', 'OwO Titan', 'OwO Mullet', 'OwO Yec', 'OwO AcePar', 'OwO Rage', 'OwO Dzoga', 'OwO Skitter',
