@@ -868,7 +868,7 @@ async def event(ctx,skill_n):
         await ctx.send("total <=> combat <=> mining <=> smithing <=> woodcutting <=> crafting <=> fishing <=> cooking")
 @event.error
 async def on_command_error(ctx,error):
-    if isinstance(error, commands.MissingRequiredArguments):
+    if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("No Skill Specified ,Please Enter One From :")
         await ctx.send("total <=> combat <=> mining <=> smithing <=> woodcutting <=> crafting <=> fishing <=> cooking")
 
