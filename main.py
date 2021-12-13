@@ -323,15 +323,21 @@ async def SearchEvent(skill_name):
                     continue
     temp_dic = {k: v for k, v in sorted(unsortedl.items(), key=lambda item: item[1],reverse=True)}
     members_sorted.clear()
+    total_xp = 0
     for key, value in temp_dic.items():
-        test = key + " <> " + "{:,}".format(value)
-        members_sorted.append(test)
+        if value != 0 :
+            total_xp += value
+            test = key + " <> " + "{:,}".format(value)
+            members_sorted.append(test)
+        else:
+            continue
+    
     mini_list = []
     mini_list = members_sorted
     temp_dic = {}
     end = time.time()
     total_time = math.ceil(end - start)
-    return mini_list, total_time
+    return mini_list, total_time, total_xp
 ###############################################################################################
 
 async def SearchEventTotal():
@@ -380,15 +386,20 @@ async def SearchEventTotal():
                         continue
     temp_dic = {k: v for k, v in sorted(unsortedl.items(), key=lambda item: item[1],reverse=True)}
     members_sorted.clear()
+    total_xp = 0
     for key, value in temp_dic.items():
-        test = key + " <> " + "{:,}".format(value)
-        members_sorted.append(test)
+        if value != 0 :
+            total_xp += value
+            test = key + " <> " + "{:,}".format(value)
+            members_sorted.append(test)
+        else:
+            continue
     mini_list = []
     mini_list = members_sorted
     temp_dic = {}
     end = time.time()
     total_time = math.ceil(end - start)
-    return mini_list, total_time
+    return mini_list, total_time, total_xp
 
 ######################################################################Bot_Funtctions##################################################################################        
         
@@ -816,6 +827,8 @@ async def event(ctx,skill_n):
         a = asyncio.run(SearchEvent(skill_name))
         lb_list = a[0]
         time_taken = a[1]
+        total_xp = a[2]
+        total_xp_txt =  "{:,}".format(total_xp)
         lb1 = ""
         lb2 = ""
         lb_size = len(lb_list)
@@ -828,12 +841,14 @@ async def event(ctx,skill_n):
             lb2 = lb2 + "Rank#"+str(player+1) +'\n'+ lb_list[player] + '\n'
         await ctx.send(lb2)
 
-        await ctx.send(f"time taken : {time_taken} seconds.")
+        await ctx.send(f"Total Xp : {total_xp_text} \n Time Taken : {time_taken} seconds.")
     elif skill_name == 'total' :
         await ctx.send(f"Fetching Total Xp Data ...")
         a = asyncio.run(SearchEventTotal())
         lb_list = a[0]
         time_taken = a[1]
+        total_xp = a[2]
+        total_xp_txt =  "{:,}".format(total_xp)
         lb1 = ""
         lb2 = ""
         lb_size = len(lb_list)
@@ -846,9 +861,10 @@ async def event(ctx,skill_n):
             lb2 = lb2 + "Rank#"+str(player+1) +'\n'+ lb_list[player] + '\n'
         await ctx.send(lb2)
 
-        await ctx.send(f"time taken : {time_taken} seconds.")
+        await ctx.send(f"Total Xp : {total_xp_txt} \n Time Taken : {time_taken} seconds.")
     else:
-        await ctx.send("Unkown Skill Or Wrong Spelling, Please Use From : \n total<>combat<>mining<>smithing<>woodcutting<>crafting<>fishing<>cooking") 
+        await ctx.send("Unkown Skill Or Wrong Spelling, Please Use From :")
+        await ctx.send("total <=> combat <=> mining <=> smithing <=> woodcutting <=> crafting <=> fishing <=> cooking")
 @bot.command()
 async def lb(ctx,test1,test2,xp):
     global unsorted_lb
