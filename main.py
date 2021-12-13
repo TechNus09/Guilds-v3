@@ -356,7 +356,7 @@ async def SearchEventTotal():
     temp_dic = {}
     members_sorted = []
     unsortedl = {}
-    for skill_xp in range(7):
+    for skill_x in range(7):
         async with aiohttp.ClientSession() as session:
             
             to_do = get_tasks(session,skill[skill_x])
