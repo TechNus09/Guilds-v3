@@ -330,9 +330,66 @@ async def SearchEvent(skill_name):
     mini_list = members_sorted
     temp_dic = {}
     end = time.time()
-    total_time = end - start
+    total_time = math.ceil(end - start)
     return mini_list, total_time
+###############################################################################################
 
+async def SearchEventTotal():
+    global members_log, members_list, unsorted_lb
+    
+    start = time.time()
+    namelist = ['OwO Silent', 'OwO TheDuck', 'OwO Mirage', 'OwO Thor', 'OwO DaveDust', 'OwO Tempy', 'OwO Tantrid', 'OwO Smith', 'OwO Freaka', 'OwO DirtyShots', 'OwO h0lka',
+    'OwO TheWitcher', 'OwO Krieger', 'OwO Dryness', 'OwO Salty', 'OwO TJ', 'OwO Spooniest', 'OwO DarkSecret', 'OwO Moist', 'OwO Matt', 'OwO Aeonic', 'OwO Olive Yew', 'OwO KcAlex',
+    'OwO Messwithme', 'OwO CromacK', 'OwO Kreat', 'OwO Cerez Jr', 'OwO DigiPope', 'OwO Roy Donk', 'OwO Maxxd', 'OwO Heartman', 'OwO MrBrisingr', 'OwO Yekzer', 'OwO Bucketss',
+    'OwO Crixal', 'OwO Panda', 'OwO AnimeHDD', 'OwO RunPerge', 'OwO TechNus09', 'OwO Titan', 'OwO Mullet', 'OwO Yec', 'OwO AcePar', 'OwO Rage', 'OwO Dzoga', 'OwO Skitter',
+    'OwO Cool Adam', 'OwO Jaf', 'OwO Maddy', 'OwO Hentai', 'OwO Scarthach', 'OwO SAVYS', 'OwO Bunkie', 'OwO Senku', 'OwO Doony', 'OwO J Sins', 'OwO PUZZLE', 'OwO Crusha',
+    'OwO John', 'OwO Dribbyl', 'OwO Pabs', 'OwO Chez', 'OwO Birb', 'OwO DaddyShark', 'OwO Xbl', 'OwO Gage', 'OwO Avi', 'OwO l Derek l', 'OwO PeeterIV', 'OwO Shadow', 'OwO Schnee',
+    'OwO Buttcrack', 'OwO DummyThicc', 'OwO Necrotic', 'OwO Stoned', 'OwO Tzak', 'OwO Kona', 'OwO Glitchy', 'OwO Bighhhh', 'OwO White', 'OwO SeikoYuki', 'OwO Mr Yusuf', 'OwO ryry',
+    'OwO Durps', 'OwO KaitoZezo', 'OwO Bowl', 'OwO Vick Vega', 'OwO Doody', 'OwO Skaifox', 'OwO Aurora', 'OwO Smiley', 'OwO Redro', 'OWO Sriddec', 'OwO Bank', 'OwO CromacK Jr', 'OwO AJ',
+    'OwO MessEh', 'OwO Zoidberg', 'OwO Goat Bank', 'OwO GaRgAmEL', 'OwO Tasty', 'OwO Hnngh', 'OwO Lonely', 'OwO Fake User', 'OwO Life', 'OwO Uncloud', 'OwO goout', 'OwO tanttwat',
+    'OwO The Hungry', 'OwO Senpaii', 'OwO Nightmare']
+
+    log_file = members_log
+    skills_list = skills_names_list
+    skills_xp = skills_xp_list
+    sorted_lb ={}
+    temp_dic = {}
+    members_sorted = []
+    unsortedl = {}
+    for skill_xp in range(7)
+        
+        async with aiohttp.ClientSession() as session:
+            
+            to_do = get_tasks(session,skill[skill_x])
+            responses = await asyncio.gather(*to_do)
+            for response in responses:
+                fdata = await response.json()
+                for i in range(0,20):
+                    player_name = fdata[i]["name"]
+                    xp = fdata[i]["xp"]
+                    tag = player_name.split()[0]
+                    tag = tag.upper()
+                    if tag == "OWO" :
+                        name_order = namelist.index(player_name)
+                        old_xp = log_file[name_order][skills_xp[skill_x]]
+                        new_xp = xp
+                        xp_diff = new_xp - old_xp
+                        if player_name in unsortedl:
+                            unsortedl[player_name] += xp_diff
+                        else:
+                            unsortedl[player_name] = xp_diff
+                        continue
+    temp_dic = {k: v for k, v in sorted(unsortedl.items(), key=lambda item: item[1],reverse=True)}
+    members_sorted.clear()
+    for key, value in temp_dic.items():
+        test = key + " <> " + "{:,}".format(value)
+        members_sorted.append(test)
+    mini_list = []
+    mini_list = members_sorted
+    temp_dic = {}
+    end = time.time()
+    total_time = math.ceil(end - start)
+    return mini_list, total_time
 
 ######################################################################Bot_Funtctions##################################################################################        
         
@@ -751,7 +808,8 @@ async def getlist(ctx):
 """
 
 @bot.command()
-async def event(ctx,skill_name):
+async def event(ctx,skill_n):
+    skill_name = skill_n.lower()
     skill_n_l = skills_names_list
     if skill_name in skill_n_l:
         skill_name_c = skill_name.capitalize()
@@ -771,9 +829,27 @@ async def event(ctx,skill_name):
             lb2 = lb2 + "Rank#"+str(player+1) +'\n'+ lb_list[player] + '\n'
         await ctx.send(lb2)
 
-        await ctx.send(f'time taken : {time_taken}')
+        await ctx.send(f"time taken : {time_taken} seconds.")
+    elif skill_name == 'total' :
+        await ctx.send(f"Fetching Total Xp Data ...")
+        a = asyncio.run(SearchEventTotal())
+        lb_list = a[0]
+        time_taken = a[1]
+        lb1 = ""
+        lb2 = ""
+        lb_size = len(lb_list)
+        await ctx.send("Total Xp LeaderBoard")
+        for player in range(lb_size // 2):
+            lb1 = lb1 + "Rank#"+str(player+1) +'\n'+ lb_list[player] + '\n'
+        await ctx.send(lb1)
+
+        for player in range((lb_size//2)+1,lb_size):
+            lb2 = lb2 + "Rank#"+str(player+1) +'\n'+ lb_list[player] + '\n'
+        await ctx.send(lb2)
+
+        await ctx.send(f"time taken : {time_taken} seconds.")
     else:
-        await ctx.send("unkown skill, please check spelling") 
+        await ctx.send("Unkown Skill Or Wrong Spelling, Please Use From : \n total<>combat<>mining<>smithing<>woodcutting<>crafting<>fishing<>cooking") 
 @bot.command()
 async def lb(ctx,test1,test2,xp):
     global unsorted_lb
