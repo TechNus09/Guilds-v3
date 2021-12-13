@@ -866,6 +866,12 @@ async def event(ctx,skill_n):
     else:
         await ctx.send("Unkown Skill Or Wrong Spelling, Please Use From :")
         await ctx.send("total <=> combat <=> mining <=> smithing <=> woodcutting <=> crafting <=> fishing <=> cooking")
+@event.error()
+async def on_command_error(ctx):
+    await ctx.send("No Skill Specified ,Please Enter One Of :")
+    await ctx.send("total <=> combat <=> mining <=> smithing <=> woodcutting <=> crafting <=> fishing <=> cooking")
+
+
 @bot.command()
 async def lb(ctx,test1,test2,xp):
     global unsorted_lb
