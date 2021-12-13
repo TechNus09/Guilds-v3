@@ -841,7 +841,7 @@ async def event(ctx,skill_n):
             lb2 = lb2 + "Rank#"+str(player+1) +'\n'+ lb_list[player] + '\n'
         await ctx.send(lb2)
 
-        await ctx.send(f"Total Xp : {total_xp_text} \n Time Taken : {time_taken} seconds.")
+        await ctx.send(f"Total Xp : {total_xp_txt} \n Time Taken : {time_taken} seconds.")
     elif skill_name == 'total' :
         await ctx.send(f"Fetching Total Xp Data ...")
         a = asyncio.run(SearchEventTotal())
