@@ -132,7 +132,8 @@ lvldef = [46, 53, 60, 70, 80, 92, 106, 121, 140, 160, 184, 212, 243, 280, 321, 3
 511189519, 587202560]
 #######################################################
 members_log= [
- {'member_name': 'OwO Cash Money', 'combat_xp': 0, 'mining_xp': 72217800, 'smithing_xp': 571649872, 'woodcutting_xp': 80374322, 'crafting_xp': 87208852, 'fishing_xp': 380975865, 'cooking_xp': 283624900}
+ {'member_name': 'OwO Harvey', 'combat_xp': 380951225 ,'mining_xp': 102287084, 'smithing_xp': 46043608,'woodcutting_xp': 20682077, 'crafting_xp': 4472966,'fishing_xp':  6118541, 'cooking_xp': 12300}
+,{'member_name': 'OwO Cash Money', 'combat_xp': 0, 'mining_xp': 72217800, 'smithing_xp': 571649872, 'woodcutting_xp': 80374322, 'crafting_xp': 87208852, 'fishing_xp': 380975865, 'cooking_xp': 283624900}
 ,{'member_name': 'OwO Silent', 'combat_xp': 4536153492, 'mining_xp': 434930717, 'smithing_xp': 38297515, 'woodcutting_xp': 326025445, 'crafting_xp': 568024172, 'fishing_xp': 494397160, 'cooking_xp': 349145655}
 ,{'member_name': 'OwO TheDuck', 'combat_xp': 2480568998, 'mining_xp': 145858839, 'smithing_xp': 288239664, 'woodcutting_xp': 187076760, 'crafting_xp': 145225480, 'fishing_xp': 988740825, 'cooking_xp': 942283975}
 ,{'member_name': 'OwO Mirage', 'combat_xp': 1998833812, 'mining_xp': 45843639, 'smithing_xp': 37058503, 'woodcutting_xp': 42949750, 'crafting_xp': 28025409, 'fishing_xp': 120849670, 'cooking_xp': 9061805}
@@ -256,7 +257,7 @@ members_list = ['OwO Cash Money', 'OwO Silent', 'OwO TheDuck', 'OwO Mirage', 'Ow
 'OwO MessEh', 'OwO Zoidberg', 'OwO Goat Bank', 'OwO GaRgAmEL', 'OwO Tasty', 'OwO Hnngh', 'OwO Lonely', 'OwO Fake User', 'OwO Life', 'OwO Uncloud', 'OwO goout', 'OwO tanttwat',
 'OwO The Hungry', 'OwO Senpaii', 'OwO Nightmare']
 
-unsorted_lb = {'OwO Cash Money': 0, 'OwO Silent': 0, 'OwO TheDuck': 0, 'OwO Mirage': 0, 'OwO Thor': 0, 'OwO DaveDust': 0, 'OwO Tempy': 0, 'OwO Tantrid': 0, 'OwO Smith': 0, 'OwO Freaka': 0, 'OwO DirtyShots': 0, 
+unsorted_lb = {'OwO Harvey': 0, 'OwO Cash Money': 0, 'OwO Silent': 0, 'OwO TheDuck': 0, 'OwO Mirage': 0, 'OwO Thor': 0, 'OwO DaveDust': 0, 'OwO Tempy': 0, 'OwO Tantrid': 0, 'OwO Smith': 0, 'OwO Freaka': 0, 'OwO DirtyShots': 0, 
 'OwO h0lka': 0, 'OwO TheWitcher': 0, 'OwO Krieger': 0, 'OwO Dryness': 0, 'OwO Salty': 0, 'OwO TJ': 0, 'OwO Spooniest': 0, 'OwO DarkSecret': 0, 'OwO Moist': 0, 'OwO Matt': 0, 'OwO Aeonic': 0, 
 'OwO Olive Yew': 0, 'OwO KcAlex': 0, 'OwO Messwithme': 0, 'OwO CromacK': 0, 'OwO Kreat': 0, 'OwO Cerez Jr': 0, 'OwO DigiPope': 0, 'OwO Roy Donk': 0, 'OwO Maxxd': 0, 'OwO Heartman': 0,
 'OwO MrBrisingr': 0, 'OwO Yekzer': 0, 'OwO Bucketss': 0, 'OwO Crixal': 0, 'OwO Panda': 0, 'OwO AnimeHDD': 0, 'OwO RunPerge': 0, 'OwO TechNus09': 0, 'OwO Titan': 0, 'OwO Mullet': 0, 'OwO Yec': 0,
@@ -285,7 +286,7 @@ async def SearchEvent(skill_name):
     global members_log, members_list, unsorted_lb
     
     start = time.time()
-    namelist = ['OwO Cash Money', 'OwO Silent', 'OwO TheDuck', 'OwO Mirage', 'OwO Thor', 'OwO DaveDust', 'OwO Tempy', 'OwO Tantrid', 'OwO Smith', 'OwO Freaka', 'OwO DirtyShots', 'OwO h0lka',
+    namelist = ['OwO Harvey','OwO Cash Money', 'OwO Silent', 'OwO TheDuck', 'OwO Mirage', 'OwO Thor', 'OwO DaveDust', 'OwO Tempy', 'OwO Tantrid', 'OwO Smith', 'OwO Freaka', 'OwO DirtyShots', 'OwO h0lka',
     'OwO TheWitcher', 'OwO Krieger', 'OwO Dryness', 'OwO Salty', 'OwO TJ', 'OwO Spooniest', 'OwO DarkSecret', 'OwO Moist', 'OwO Matt', 'OwO Aeonic', 'OwO Olive Yew', 'OwO KcAlex',
     'OwO Messwithme', 'OwO CromacK', 'OwO Kreat', 'OwO Cerez Jr', 'OwO DigiPope', 'OwO Roy Donk', 'OwO Maxxd', 'OwO Heartman', 'OwO MrBrisingr', 'OwO Yekzer', 'OwO Bucketss',
     'OwO Crixal', 'OwO Panda', 'OwO AnimeHDD', 'OwO RunPerge', 'OwO TechNus09', 'OwO Titan', 'OwO Mullet', 'OwO Yec', 'OwO AcePar', 'OwO Rage', 'OwO Dzoga', 'OwO Skitter',
@@ -345,7 +346,7 @@ async def SearchEventTotal():
     global members_log, members_list, unsorted_lb
     
     start = time.time()
-    namelist = ['OwO Cash Money', 'OwO Silent', 'OwO TheDuck', 'OwO Mirage', 'OwO Thor', 'OwO DaveDust', 'OwO Tempy', 'OwO Tantrid', 'OwO Smith', 'OwO Freaka', 'OwO DirtyShots', 'OwO h0lka',
+    namelist = ['OwO Harvey', 'OwO Cash Money', 'OwO Silent', 'OwO TheDuck', 'OwO Mirage', 'OwO Thor', 'OwO DaveDust', 'OwO Tempy', 'OwO Tantrid', 'OwO Smith', 'OwO Freaka', 'OwO DirtyShots', 'OwO h0lka',
     'OwO TheWitcher', 'OwO Krieger', 'OwO Dryness', 'OwO Salty', 'OwO TJ', 'OwO Spooniest', 'OwO DarkSecret', 'OwO Moist', 'OwO Matt', 'OwO Aeonic', 'OwO Olive Yew', 'OwO KcAlex',
     'OwO Messwithme', 'OwO CromacK', 'OwO Kreat', 'OwO Cerez Jr', 'OwO DigiPope', 'OwO Roy Donk', 'OwO Maxxd', 'OwO Heartman', 'OwO MrBrisingr', 'OwO Yekzer', 'OwO Bucketss',
     'OwO Crixal', 'OwO Panda', 'OwO AnimeHDD', 'OwO RunPerge', 'OwO TechNus09', 'OwO Titan', 'OwO Mullet', 'OwO Yec', 'OwO AcePar', 'OwO Rage', 'OwO Dzoga', 'OwO Skitter',
