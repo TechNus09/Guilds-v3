@@ -825,7 +825,7 @@ async def event(ctx,skill_n):
     skill_n_l = skills_names_list
     if skill_name in skill_n_l:
         skill_name_c = skill_name.capitalize()
-        await ctx.send(f"Fetching {skill_name_c} Data ...")
+        fetch_msg1 = await ctx.send(f"Fetching {skill_name_c} Data ...")
         a = asyncio.run(SearchEvent(skill_name))
         lb_list = a[0]
         time_taken = a[1]
@@ -834,6 +834,7 @@ async def event(ctx,skill_n):
         lb1 = ""
         lb2 = ""
         lb_size = len(lb_list)
+        await fetch_msg1.delete()
         await ctx.send(f"{skill_name_c} LeaderBoard")
         for player in range(lb_size // 2):
             lb1 = lb1 + "Rank#"+str(player+1) +'\n'+ lb_list[player] + '\n'
@@ -845,7 +846,7 @@ async def event(ctx,skill_n):
 
         await ctx.send(f"Total Xp : {total_xp_txt} \n Time Taken : {time_taken} seconds.")
     elif skill_name == 'total' :
-        await ctx.send(f"Fetching Total Xp Data ...")
+        fetch_msg2 = await ctx.send(f"Fetching Total Xp Data ...")
         a = asyncio.run(SearchEventTotal())
         lb_list = a[0]
         time_taken = a[1]
@@ -854,6 +855,7 @@ async def event(ctx,skill_n):
         lb1 = ""
         lb2 = ""
         lb_size = len(lb_list)
+        await fetch_msg2.delete()
         await ctx.send("Total Xp LeaderBoard")
         for player in range(lb_size // 2):
             lb1 = lb1 + "Rank#"+str(player+1) +'\n'+ lb_list[player] + '\n'
