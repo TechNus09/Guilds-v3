@@ -926,7 +926,7 @@ async def comp(ctx,skill_name = 'total'):
 
         await fetch_msg1.delete()
 
-        c_embed = d.Embed(title= f"{skill_name_c} LeaderBoard" , color=0x6600ff)
+        c_embed = d.Embed(title= f"{skill_name_c}" , color=0x6600ff)
         for player in range(2):
             c_embed.add_field(name=f"{c_ranks[player]} place :", value= lb_list[player], inline=False)          
         c_embed.add_field(name= "\u200b" ,value=  f"Total Xp : {total_xp_txt}", inline=False)
@@ -944,7 +944,7 @@ async def comp(ctx,skill_name = 'total'):
         
         await fetch_msg2.delete()
         
-        c_embed = d.Embed(title= "Total Xp LeaderBoard" , color=0x6600ff)
+        c_embed = d.Embed(title= "Total Xp" , color=0x6600ff)
         for player in range(2):
             c_embed.add_field(name=f"{c_ranks[player]} place :", value= lb_list[player], inline=False)          
         c_embed.add_field(name= "\u200b" ,value=  f"Total Xp : {total_xp_txt}", inline=False)
