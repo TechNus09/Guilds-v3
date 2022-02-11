@@ -932,7 +932,7 @@ async def comp(ctx,skill_name = None):
             c_embed.add_field(name=f"{c_ranks[player]}", value= lb_list[player], inline=False)          
         c_embed.add_field(name= "\u200b" ,value=  f"Total Xp : {total_xp_txt}", inline=False)
         c_embed.set_footer(text= f"Time Taken : {time_taken} seconds.")
-        await ctx.send(c_embed)
+        await ctx.send(embed=c_embed)
 
     elif skill_name == 'total' or None :
         fetch_msg2 = await ctx.send(f"Fetching Total Xp Data ...")
@@ -950,7 +950,7 @@ async def comp(ctx,skill_name = None):
             c_embed.add_field(name=f"{c_ranks[player]}", value= lb_list[player], inline=False)          
         c_embed.add_field(name= "\u200b" ,value=  f"Total Xp : {total_xp_txt}", inline=False)
         c_embed.set_footer(text= f"Time Taken : {time_taken} seconds.")
-        await ctx.send(c_embed)
+        await ctx.send(embed=c_embed)
         
     else:
         await ctx.send("Unkown Skill Or Wrong Spelling, Please Use From :")
