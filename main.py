@@ -343,12 +343,11 @@ async def SearchEvent(skill_name):
 ###############################################################################################
 players_xp = [{'member_name': 'OwO Maddy', 'mining_xp' : 29650310 , 'woodcutting_xp': 45425673 },
               {'member_name': 'OwO AJ', 'mining_xp' : 1359865 , 'woodcutting_xp': 1420576 }]
-
+c_xp = ['mining_xp','woodcutting_xp']
 async def competitionTotal() :
     start = time.time()
     names = ['OwO Maddy' ,'OwO AJ']
     c_skill =['-mining', '-woodcutting']
-    skills_xp = skills_xp_list
     sorted_lb = {}
     temp_dic = {}
     members_sorted = []
@@ -368,7 +367,7 @@ async def competitionTotal() :
                     
                     if player_name in names :
                         name_order = names.index(player_name)
-                        old_xp = players_xp[name_order][skills_xp[skill_x]]
+                        old_xp = players_xp[name_order][c_xp[skill_x]]
                         new_xp = xp
                         xp_diff = new_xp - old_xp
                         if player_name in unsortedl:
@@ -396,14 +395,14 @@ async def competitionTotal() :
 async def competition(skill_name) :
     start = time.time()
     names = ['OwO Maddy' ,'OwO AJ']
-    c_skill =['mining', 'woodcutting']
-    skills_xp = skills_xp_list
+    c_skill =['-mining', '-woodcutting']
+    c_skill_n =['mining', 'woodcutting']
     temp_dic = {}
     members_sorted = []
     unsortedl = {}
-    skill_x = skills.index(skill_name.lower())
+    skill_x = c_skill_n.index(skill_name.lower())
     async with aiohttp.ClientSession() as session :
-        to_do = get_tasks(session, skill[skill_x])
+        to_do = get_tasks(session, c_skill[skill_x])
         responses = await asyncio.gather(*to_do)
         for response in responses:
             fdata = await response.json()
@@ -912,7 +911,7 @@ async def getlist(ctx):
 """
 #########
 @bot.command()
-async def comp(ctx,skill_name = None):
+async def comp(ctx,skill_name = 'total'):
     c_ranks = [":first_place:",":second_place:"]
     skill_n_l = skills_names_list
     if skill_name.lower() in skill_n_l:
@@ -929,12 +928,12 @@ async def comp(ctx,skill_name = None):
 
         c_embed = d.Embed(title= f"{skill_name_c} LeaderBoard" , color=0x6600ff)
         for player in range(2):
-            c_embed.add_field(name=f"{c_ranks[player]}", value= lb_list[player], inline=False)          
+            c_embed.add_field(name=f"{c_ranks[player]} place :", value= lb_list[player], inline=False)          
         c_embed.add_field(name= "\u200b" ,value=  f"Total Xp : {total_xp_txt}", inline=False)
         c_embed.set_footer(text= f"Time Taken : {time_taken} seconds.")
         await ctx.send(embed=c_embed)
 
-    elif skill_name == 'total' or None :
+    elif skill_name.lower() == 'total' :
         fetch_msg2 = await ctx.send(f"Fetching Total Xp Data ...")
         a = asyncio.run(competitionTotal())
         lb_list = a[0]
@@ -947,7 +946,7 @@ async def comp(ctx,skill_name = None):
         
         c_embed = d.Embed(title= f"{skill_name_c} LeaderBoard" , color=0x6600ff)
         for player in range(2):
-            c_embed.add_field(name=f"{c_ranks[player]}", value= lb_list[player], inline=False)          
+            c_embed.add_field(name=f"{c_ranks[player]} place :", value= lb_list[player], inline=False)          
         c_embed.add_field(name= "\u200b" ,value=  f"Total Xp : {total_xp_txt}", inline=False)
         c_embed.set_footer(text= f"Time Taken : {time_taken} seconds.")
         await ctx.send(embed=c_embed)
