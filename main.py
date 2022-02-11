@@ -345,7 +345,7 @@ players_xp = [{'member_name': 'OwO Maddy', 'mining_xp' : 29650310 , 'woodcutting
               {'member_name': 'OwO AJ', 'mining_xp' : 1359865 , 'woodcutting_xp': 1420576 }]
 
 async def competitionTotal() :
-    stat = time.time()
+    start = time.time()
     names = ['OwO Maddy' ,'OwO AJ']
     c_skill =['-mining', '-woodcutting']
     skills_xp = skills_xp_list
@@ -396,7 +396,7 @@ async def competitionTotal() :
 
 
 async def competition(skill_name) :
-    stat = time.time()
+    start = time.time()
     names = ['OwO Maddy' ,'OwO AJ']
     c_skill =['mining', 'woodcutting']
     skills_xp = skills_xp_list
