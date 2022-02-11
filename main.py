@@ -413,7 +413,7 @@ async def competition(skill_name) :
                     
                 if player_name in names :
                     name_order = names.index(player_name)
-                    old_xp = players_xp[name_order][skills_xp[skill_x]]
+                    old_xp = players_xp[name_order][c_xp[skill_x]]
                     new_xp = xp
                     xp_diff = new_xp - old_xp
                     unsortedl[player_name] = xp_diff
@@ -944,7 +944,7 @@ async def comp(ctx,skill_name = 'total'):
         
         await fetch_msg2.delete()
         
-        c_embed = d.Embed(title= f"{skill_name_c} LeaderBoard" , color=0x6600ff)
+        c_embed = d.Embed(title= "Total Xp LeaderBoard" , color=0x6600ff)
         for player in range(2):
             c_embed.add_field(name=f"{c_ranks[player]} place :", value= lb_list[player], inline=False)          
         c_embed.add_field(name= "\u200b" ,value=  f"Total Xp : {total_xp_txt}", inline=False)
