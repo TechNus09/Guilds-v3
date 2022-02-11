@@ -352,7 +352,7 @@ async def competitionTotal() :
     sorted_lb = {}
     temp_dic = {}
     members_sorted = []
-    unsorted = {}
+    unsortedl = {}
     
     
     for skill_x in range(2):
@@ -402,7 +402,7 @@ async def competition(skill_name) :
     skills_xp = skills_xp_list
     temp_dic = {}
     members_sorted = []
-    unsorted = {}
+    unsortedl = {}
     skill_x = skills.index(skill_name.lower())
     async with aiohttp.ClientSession() as session :
         to_do = get_tasks(session, skill[skill_x])
