@@ -930,7 +930,7 @@ async def comp(ctx,skill_name = None):
 
         await fetch_msg1.delete()
         await ctx.send(f"{skill_name_c} LeaderBoard")
-        for player in range(2):
+        for player in range(len(lb_list)):
             lb = lb + "Rank#"+str(player+1) +'\n'+ lb_list[player] + '\n'
         await ctx.send(lb)
 
@@ -946,7 +946,7 @@ async def comp(ctx,skill_name = None):
         
         await fetch_msg2.delete()
         await ctx.send("Total Xp LeaderBoard")
-        for player in range(2):
+        for player in range(len(lb_list)):
             lb = lb + "Rank#"+str(player+1) +'\n'+ lb_list[player] + '\n'
         await ctx.send(lb)
 
