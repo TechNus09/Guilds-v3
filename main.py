@@ -918,8 +918,7 @@ async def getlist(ctx):
 @bot.command()
 async def comp(ctx,skill_n = None):
     
-    if skill_name in skill_n_l:
-        skill_name = skill_n.lower()
+    if skill_name.lower() in skill_n_l:
         skill_n_l = skills_names_list
         skill_name_c = skill_name.capitalize()
         fetch_msg1 = await ctx.send(f"Fetching {skill_name_c} Data ...")
