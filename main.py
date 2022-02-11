@@ -380,12 +380,10 @@ async def competitionTotal() :
     members_sorted.clear()
     total_xp = 0
     for key, value in temp_dic.items():
-        if value != 0 :
-            total_xp += value
-            test = key + " <> " + "{:,}".format(value)
-            members_sorted.append(test)
-        else:
-            continue
+        total_xp += value
+        test = key + " <> " + "{:,}".format(value)
+        members_sorted.append(test)
+        
     mini_list = []
     mini_list = members_sorted
     temp_dic = {}
@@ -424,12 +422,10 @@ async def competition(skill_name) :
     members_sorted.clear()
     total_xp = 0
     for key, value in temp_dic.items():
-        if value != 0 :
-            total_xp += value
-            test = key + " <> " + "{:,}".format(value)
-            members_sorted.append(test)
-        else:
-            continue
+        total_xp += value
+        test = key + " <> " + "{:,}".format(value)
+        members_sorted.append(test)
+
     mini_list = []
     mini_list = members_sorted
     temp_dic = {}
@@ -917,6 +913,7 @@ async def getlist(ctx):
 #########
 @bot.command()
 async def comp(ctx,skill_name = None):
+    c_ranks = [":first_place:",":second_place:"]
     skill_n_l = skills_names_list
     if skill_name.lower() in skill_n_l:
         skill_name_c = skill_name.capitalize()
@@ -929,12 +926,14 @@ async def comp(ctx,skill_name = None):
         lb = ""
 
         await fetch_msg1.delete()
-        await ctx.send(f"{skill_name_c} LeaderBoard")
-        for player in range(len(lb_list)):
-            lb = lb + "Rank#"+str(player+1) +'\n'+ lb_list[player] + '\n'
-        await ctx.send(lb)
 
-        await ctx.send(f"Total Xp : {total_xp_txt} \n Time Taken : {time_taken} seconds.")
+        c_embed = d.Embed(title= f"{skill_name_c} LeaderBoard" , color=0x6600ff)
+        for player in range(2):
+            c_embed.add_field(name=f"{c_ranks[player]}", value= lb_list[player], inline=False)          
+        c_embed.add_field(name= \u200b ,value=  f"Total Xp : {total_xp_txt}", inline=False)
+        c_embed.set_footer(text= f"Time Taken : {time_taken} seconds.")
+        await ctx.send(c_embed)
+
     elif skill_name == 'total' or None :
         fetch_msg2 = await ctx.send(f"Fetching Total Xp Data ...")
         a = asyncio.run(competitionTotal())
@@ -945,12 +944,14 @@ async def comp(ctx,skill_name = None):
         lb = ""
         
         await fetch_msg2.delete()
-        await ctx.send("Total Xp LeaderBoard")
-        for player in range(len(lb_list)):
-            lb = lb + "Rank#"+str(player+1) +'\n'+ lb_list[player] + '\n'
-        await ctx.send(lb)
-
-        await ctx.send(f"Total Xp : {total_xp_txt} \n Time Taken : {time_taken} seconds.")
+        
+        c_embed = d.Embed(title= f"{skill_name_c} LeaderBoard" , color=0x6600ff)
+        for player in range(2):
+            c_embed.add_field(name=f"{c_ranks[player]}", value= lb_list[player], inline=False)          
+        c_embed.add_field(name= \u200b ,value=  f"Total Xp : {total_xp_txt}", inline=False)
+        c_embed.set_footer(text= f"Time Taken : {time_taken} seconds.")
+        await ctx.send(c_embed)
+        
     else:
         await ctx.send("Unkown Skill Or Wrong Spelling, Please Use From :")
         await ctx.send("total <=> mining <=> woodcutting")
