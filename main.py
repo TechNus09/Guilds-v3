@@ -916,7 +916,7 @@ async def getlist(ctx):
 """
 #########
 @bot.command()
-async def comp(ctx,skill_n = None):
+async def comp(ctx,skill_name = None):
     
     if skill_name.lower() in skill_n_l:
         skill_n_l = skills_names_list
