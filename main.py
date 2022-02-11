@@ -341,6 +341,102 @@ async def SearchEvent(skill_name):
     total_time = math.ceil(end - start)
     return mini_list, total_time, total_xp
 ###############################################################################################
+players_xp = [{'member_name': 'OwO Maddy', 'mining_xp' : 29650310 , 'woodcutting_xp': 45425673 },
+              {'member_name': 'OwO AJ', 'mining_xp' : 1359865 , 'woodcutting_xp': 1420576 }]
+
+async def competitionTotal() :
+    stat = time.time()
+    names = ['OwO Maddy' ,'OwO AJ']
+    c_skill =['-mining', '-woodcutting']
+    skills_xp = skills_xp_list
+    sorted_lb = {}
+    temp_dic = {}
+    members_sorted = []
+    unsorted = {}
+    
+    
+    for skill_x in range(2):
+        async with aiohttp.ClientSession() as session :
+            to_do = get_tasks(session, c_skill[skill_x])
+            responses = await asyncio.gather(*to_do)
+            for response in responses:
+                fdata = await response.json()
+                for i in range(0,20):
+                    player_name = fdata[i]["name"]
+                    xp = fdata[i]["xp"]
+                    
+                    
+                    if player_name in names :
+                        name_order = names.index(player_name)
+                        old_xp = players_xp[name_order][skills_xp[skill_x]]
+                        new_xp = xp
+                        xp_diff = new_xp - old_xp
+                        if player_name in unsortedl:
+                            unsortedl[player_name] += xp_diff
+                        else:
+                            unsortedl[player_name] = xp_diff
+                        continue
+    temp_dic = {k: v for k, v in sorted(unsortedl.items(), key=lambda item: item[1],reverse=True)}
+    members_sorted.clear()
+    total_xp = 0
+    for key, value in temp_dic.items():
+        if value != 0 :
+            total_xp += value
+            test = key + " <> " + "{:,}".format(value)
+            members_sorted.append(test)
+        else:
+            continue
+    mini_list = []
+    mini_list = members_sorted
+    temp_dic = {}
+    end = time.time()
+    total_time = math.ceil(end - start)
+    return mini_list, total_time, total_xp
+
+
+
+async def competition(skill_name) :
+    stat = time.time()
+    names = ['OwO Maddy' ,'OwO AJ']
+    c_skill =['mining', 'woodcutting']
+    skills_xp = skills_xp_list
+    temp_dic = {}
+    members_sorted = []
+    unsorted = {}
+    skill_x = skills.index(skill_name.lower())
+    async with aiohttp.ClientSession() as session :
+        to_do = get_tasks(session, skill[skill_x])
+        responses = await asyncio.gather(*to_do)
+        for response in responses:
+            fdata = await response.json()
+            for i in range(0,20):
+                player_name = fdata[i]["name"]
+                xp = fdata[i]["xp"]
+                    
+                    
+                if player_name in names :
+                    name_order = names.index(player_name)
+                    old_xp = players_xp[name_order][skills_xp[skill_x]]
+                    new_xp = xp
+                    xp_diff = new_xp - old_xp
+                    unsortedl[player_name] = xp_diff
+    temp_dic = {k: v for k, v in sorted(unsortedl.items(), key=lambda item: item[1],reverse=True)}
+    members_sorted.clear()
+    total_xp = 0
+    for key, value in temp_dic.items():
+        if value != 0 :
+            total_xp += value
+            test = key + " <> " + "{:,}".format(value)
+            members_sorted.append(test)
+        else:
+            continue
+    mini_list = []
+    mini_list = members_sorted
+    temp_dic = {}
+    end = time.time()
+    total_time = math.ceil(end - start)
+    return mini_list, total_time, total_xp
+
 
 async def SearchEventTotal():
     global members_log, members_list, unsorted_lb
@@ -818,6 +914,48 @@ async def getlist(ctx):
         await ctx.send(members_xp_list[i])
     await ctx.send(f'time taken {time_taken}')
 """
+#########
+@bot.command()
+async def comp(ctx,skill_n = None):
+    skill_name = skill_n.lower()
+    skill_n_l = skills_names_list
+    if skill_name in skill_n_l:
+        skill_name_c = skill_name.capitalize()
+        fetch_msg1 = await ctx.send(f"Fetching {skill_name_c} Data ...")
+        a = asyncio.run(competition(skill_name))
+        lb_list = a[0]
+        time_taken = a[1]
+        total_xp = a[2]
+        total_xp_txt =  "{:,}".format(total_xp)
+        lb = ""
+
+        await fetch_msg1.delete()
+        await ctx.send(f"{skill_name_c} LeaderBoard")
+        for player in range(2):
+            lb = lb + "Rank#"+str(player+1) +'\n'+ lb_list[player] + '\n'
+        await ctx.send(lb)
+
+        await ctx.send(f"Total Xp : {total_xp_txt} \n Time Taken : {time_taken} seconds.")
+    elif skill_name == 'total' or None :
+        fetch_msg2 = await ctx.send(f"Fetching Total Xp Data ...")
+        a = asyncio.run(competitionTotal())
+        lb_list = a[0]
+        time_taken = a[1]
+        total_xp = a[2]
+        total_xp_txt =  "{:,}".format(total_xp)
+        lb = ""
+        
+        await fetch_msg2.delete()
+        await ctx.send("Total Xp LeaderBoard")
+        for player in range(2):
+            lb = lb + "Rank#"+str(player+1) +'\n'+ lb_list[player] + '\n'
+        await ctx.send(lb)
+
+        await ctx.send(f"Total Xp : {total_xp_txt} \n Time Taken : {time_taken} seconds.")
+    else:
+        await ctx.send("Unkown Skill Or Wrong Spelling, Please Use From :")
+        await ctx.send("total <=> mining <=> woodcutting")
+#########
 
 @bot.command()
 async def event(ctx,skill_n):
