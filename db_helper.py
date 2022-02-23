@@ -8,42 +8,64 @@ db_pw = os.environ.get("DB_PW")
 db_host = os.environ.get("DB_HOST")
 db_port = os.environ.get("DB_PORT")
 db_name = os.environ.get("DB_NAME")
-connection = psycopg2.connect(
+def con():
+    connection = psycopg2.connect(
                                 user=db_user,
                                 password=db_pw,
                                 host=db_host,
                                 port=db_port,
                                 database=db_name
                                 )
+    return con
+def createT()
+    con = con()
+    cur = con.cursor()
+    create_table = """
+                   CREATE TABLE event
+                   (NAME    TEXT    PRIMARY KEY    NOT NULL,
+                    WOODCUTTING    INT    NOT NULL,
+                    MINING    INT NOT NULL);
+                   """
+    cur.execute(create_table)
+    con.commit()
+    cur.close()
+    con.close()
 
-def insert(count):
+
+
+def insert(m_name,m_wc,m_mining):
     cur = connection.cursor()
     insert_query = """ 
-                    INSERT INTO cmd (SKILL,COUNT) 
-                    VALUES ('calc',%s)
+                    INSERT INTO event (NAME,WOODCUTTING,MINING) 
+                    VALUES ('m_name',%s,'m_wc',%s,'m_mining',%s)
                     """
     cur.execute(insert_query,count)
     connection.commit()
     cur.close()
 
-def update(c):
+def update(m_name,m_wc,m_mining):
     cur = connection.cursor()
-    update_query = """
-                    Update cmd
-                    set count = %s
-                    where skill = 'calc'
+    update_wc_query = """
+                    Update event
+                    set woodcutting = %s
+                    where name = {m_name}
                     """
-    cur.execute(update_query,(c,))
+    update_mining_query = """
+                    Update event
+                    set mining = %s
+                    where name = {m_name}
+                    """
+    cur.execute(update_wc_query,(m_wc,),update_mining_query,(m_mining,))
     connection.commit()
     cur.close()
 
 
-def retrieve():
+def retrieve(skill):
     cur = connection.cursor()
-    cur.execute("SELECT count FROM cmd ORDER BY count")
+    cur.execute("SELECT {skill} FROM event ORDER BY {skill}")
     row = cur.fetchone()
     while row is not None:
-        count = int(row[0])
+        skill_data = int(row)
         row = cur.fetchone()
     connection.commit()
     cur.close()
