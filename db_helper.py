@@ -30,6 +30,7 @@ def createT()
     con.commit()
     cur.close()
     con.close()
+    return True
 
 
 
