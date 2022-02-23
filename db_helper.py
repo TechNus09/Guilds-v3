@@ -17,7 +17,7 @@ def con():
                                 database=db_name
                                 )
     return con
-def createT()
+def createT():
     con = con()
     cur = con.cursor()
     create_table = """
