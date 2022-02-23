@@ -8,7 +8,7 @@ db_pw = os.environ.get("DB_PW")
 db_host = os.environ.get("DB_HOST")
 db_port = os.environ.get("DB_PORT")
 db_name = os.environ.get("DB_NAME")
-def con():
+def conn():
     connection = psycopg2.connect(
                                 user=db_user,
                                 password=db_pw,
@@ -16,9 +16,9 @@ def con():
                                 port=db_port,
                                 database=db_name
                                 )
-    return con
+    return connection
 def createT():
-    con = con()
+    con = conn()
     cur = con.cursor()
     create_table = """
                    CREATE TABLE event
