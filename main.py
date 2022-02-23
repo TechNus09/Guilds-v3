@@ -11,6 +11,7 @@ import json
 import nest_asyncio
 import time
 import aiohttp
+from db_helper import createT
 
 #from logs import members_log, members_list, unsorted_lb, skills_names_list, skills_xp_list
 
@@ -867,7 +868,13 @@ async def ping(ctx):
     await ctx.send(f"Pong! {round(bot.latency * 1000)}ms")
 
     
-
+@bot.command()
+async def log(ctx):
+    l = createT()
+    if l :
+        await ctx.send("table created")
+    else:
+        await ctx.send("error")
 
 @bot.command()
 async def hello(ctx):
