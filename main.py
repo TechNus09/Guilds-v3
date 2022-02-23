@@ -904,7 +904,7 @@ async def date(ctx):
     d1 = dt.today().strftime("%d/%m/%Y")
     await ctx.send(f'Today is : {d1}')
 
-"""
+
 @bot.command()
 async def getlist(ctx):
     await ctx.send('getting init members xp')
@@ -915,7 +915,7 @@ async def getlist(ctx):
     for i in range(len(members_xp_list)):
         await ctx.send(members_xp_list[i])
     await ctx.send(f'time taken {time_taken}')
-"""
+
 #########
 @bot.command()
 async def comp(ctx,skill_name = 'total'):
