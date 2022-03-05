@@ -6,5 +6,5 @@ requests==2.25.1
 nest-asyncio==1.5.1
 asyncio==3.4.3
 aiohttp==3.7.4.post0
-psycopg2==2.9.2
+discord-ui==5.1.6
 discord.py-pagination==0.0.3
