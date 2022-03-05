@@ -11,7 +11,7 @@ import json
 import nest_asyncio
 import time
 import aiohttp
-import discordUtils
+import DiscordUtils
 
 
 #from logs import members_log, members_list, unsorted_lb, skills_names_list, skills_xp_list
