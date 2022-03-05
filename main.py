@@ -12,6 +12,7 @@ import nest_asyncio
 import time
 import aiohttp
 from db_helper import createT
+import Paginator
 
 #from logs import members_log, members_list, unsorted_lb, skills_names_list, skills_xp_list
 
@@ -867,14 +868,6 @@ async def on_ready():
 async def ping(ctx):
     await ctx.send(f"Pong! {round(bot.latency * 1000)}ms")
 
-    
-@bot.command()
-async def log(ctx):
-    l = createT()
-    if l :
-        await ctx.send("table created")
-    else:
-        await ctx.send("error")
 
 @bot.command()
 async def hello(ctx):
@@ -1282,6 +1275,7 @@ async def guildlb(ctx,skill_name,guildtag):
     embeds_list = [embed0,embed1,embed2,embed3,embed4,embed5,embed6,embed7,embed8,embed9,embed10,embed11,embed12,embed13,embed14,embed15,embed16,embed17]
     
     members_msg0 = ""
+    pager=[]
     
     for i in range(embeds_int):
         members_msg0 = ""
@@ -1296,7 +1290,8 @@ async def guildlb(ctx,skill_name,guildtag):
         members_msg0=""
         if i == embeds_int-1:
             embeds_list[i].set_footer(text="time taken : "+str(cmd_time)+" seconds.")
-        await ctx.send(embed=embeds_list[i])
+        pager.append(embeds_list[i])
+    await Paginator.Simple().start(ctx, pages=pager)
     test_list_8.clear()    
 
 
