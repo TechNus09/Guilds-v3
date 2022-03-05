@@ -11,8 +11,7 @@ import json
 import nest_asyncio
 import time
 import aiohttp
-from discord_ui import *
-import Paginator
+import discordUtils
 
 
 #from logs import members_log, members_list, unsorted_lb, skills_names_list, skills_xp_list
@@ -1292,7 +1291,14 @@ async def guildlb(ctx,skill_name,guildtag):
         if i == embeds_int-1:
             embeds_list[i].set_footer(text="time taken : "+str(cmd_time)+" seconds.")
         pager.append(embeds_list[i])
-    await Paginator.Simple().start(ctx, pages=pager)
+    paginator = DiscordUtils.Pagination.CustomEmbedPaginator(ctx)
+    paginator.add_reaction('⏮️', "first")
+    paginator.add_reaction('⏪', "back")
+    paginator.add_reaction('🔐', "lock")
+    paginator.add_reaction('⏩', "next")
+    paginator.add_reaction('⏭️', "last")
+    
+    await paginator.run(pager)
     test_list_8.clear()    
 
 
@@ -1370,7 +1376,7 @@ async def guildlbT(ctx,guildtag):
     embeds_list = [embed0,embed1,embed2,embed3,embed4,embed5,embed6,embed7,embed8,embed9,embed10,embed11,embed12,embed13,embed14,embed15,embed16,embed17]
     
     members_msg0 = ""
-    
+    pager=[]
     for i in range(embeds_int):
         members_msg0 = ""
         loop_list = []
@@ -1384,7 +1390,14 @@ async def guildlbT(ctx,guildtag):
         members_msg0=""
         if i == embeds_int-1:
             embeds_list[i].set_footer(text="time taken : "+str(time_take)+" seconds.")
-        await ctx.send(embed=embeds_list[i])
+        pager.append(embeds_list[i])
+    paginator = DiscordUtils.Pagination.CustomEmbedPaginator(ctx)
+    paginator.add_reaction('⏮️', "first")
+    paginator.add_reaction('⏪', "back")
+    paginator.add_reaction('🔐', "lock")
+    paginator.add_reaction('⏩', "next")
+    paginator.add_reaction('⏭️', "last")
+    await paginator.run(pager)
     test_list_10.clear()                  
 
 
