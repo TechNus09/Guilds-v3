@@ -11,8 +11,9 @@ import json
 import nest_asyncio
 import time
 import aiohttp
-from db_helper import createT
+ftom discord_ui import *
 import Paginator
+
 
 #from logs import members_log, members_list, unsorted_lb, skills_names_list, skills_xp_list
 
