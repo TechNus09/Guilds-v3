@@ -11,7 +11,7 @@ import json
 import nest_asyncio
 import time
 import aiohttp
-ftom discord_ui import *
+from discord_ui import *
 import Paginator
 
 
