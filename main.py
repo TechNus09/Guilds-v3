@@ -1278,8 +1278,8 @@ async def guildlb(ctx,skill_name,guildtag):
     paginator.add_reaction('🔐', "lock")
     paginator.add_reaction('⏩', "next")
     paginator.add_reaction('⏭️', "last")
-    
-    await paginator.run(pager)
+    await paginator.run(embed_list)
+    embed_list.clear()
     test_list_8.clear()    
 
 
@@ -1334,7 +1334,7 @@ async def guildlbT(ctx,guildtag):
     paginator.add_reaction('🔐', "lock")
     paginator.add_reaction('⏩', "next")
     paginator.add_reaction('⏭️', "last")
-    await paginator.run(pager)
+    await paginator.run(embed_list)
     embed_list.clear()
     test_list_10.clear()                  
 
