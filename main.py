@@ -1257,7 +1257,7 @@ async def guildlb(ctx,skill_name,guildtag):
     members_msg0 = ""
     pager=[]
     embed = d.Embed(title="\u200b", color=0x6600ff)
-    embed_list = [embed for embed_list in range(embeds_int) )
+    embed_list = [embed for embed_list in range(embeds_int) ]
 
     for i in range(embeds_int):
         members_msg0 = ""
@@ -1313,7 +1313,7 @@ async def guildlbT(ctx,guildtag):
     members_msg0 = ""
     pager=[]
     embed = d.Embed(title="\u200b", color=0x6600ff)
-    embed_list = [embed for embed_list in range(embeds_int) )
+    embed_list = [embed for embed_list in range(embeds_int) ]
     for i in range(embeds_int):
         
         members_msg0 = ""
