@@ -664,22 +664,23 @@ async def searchtagtotal(guildtag):
             to_do = get_tasks(session,skill_name)
             responses = await asyncio.gather(*to_do)
             for response in responses:
-                fdata = await response.json()
-                for i in range(0,20): 
-                    #check names get rank
-                    #player_rank = 20 * k + i + 1
-                    player_name = fdata[i]["name"]
-                    xp = fdata[i]["xp"]
-                    tag = player_name.split()[0]
-                    tag = tag.upper()
+                data = await response.json()
+                if data != [] :
+                    for fdata in data : 
+                        player_name = fdata["name"]
+                        xp = fdata["xp"]
+                        tag = player_name.split()[0]
+                        tag = tag.upper()
                     
-                    if tag == guildtag.upper():
-                        if player_name in guildreg :
-                            guildreg[player_name]+=xp
-                            continue
-                        else:
-                            guildreg[player_name]=xp
-                            continue
+                        if tag == guildtag.upper():
+                            if player_name in guildreg :
+                                guildreg[player_name]+=xp
+                                continue
+                            else:
+                                guildreg[player_name]=xp
+                                continue
+                elif data = [] :
+                    break
     temp_dic = {k: v for k, v in sorted(guildreg.items(), key=lambda item: item[1],reverse=True)}
     members_sorted.clear()
     for key, value in temp_dic.items():
