@@ -1271,7 +1271,7 @@ async def guildlb(ctx,skill_name,guildtag):
         embed_list[i].add_field(name='\u200b', value= members_msg0 , inline=False)
         members_msg0=""
         embed_list[i].set_footer(text=f"({i+1}/{embeds_int})")
-    pager.append(embed_list)
+        pager.append(embed_list[i])
     paginator = DiscordUtils.Pagination.CustomEmbedPaginator(ctx)
     paginator.add_reaction('⏮️', "first")
     paginator.add_reaction('⏪', "back")
