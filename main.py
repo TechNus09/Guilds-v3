@@ -1278,7 +1278,9 @@ async def guildlb(ctx,skill_name,guildtag):
     paginator.add_reaction('🔐', "lock")
     paginator.add_reaction('⏩', "next")
     paginator.add_reaction('⏭️', "last")
-    await paginator.run(embed_list)
+    #await paginator.run(embed_list)
+    for i in range(len(embed_list)):
+        await ctx.send(embed=embed_list[i])
     embed_list.clear()
     test_list_8.clear()    
 
