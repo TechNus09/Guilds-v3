@@ -1343,8 +1343,7 @@ async def guildlbT(ctx,guildtag):
 
 
     tag = guildtag.upper()
-    time_taken = temp_result_T[1]
-    time_take = int(time_taken) 
+    time_taken = int(temp_result_T[1])
 
     guildlb_msg = f"Top "+tag+": "+"[Total XP](60,000)"
     embedVar = d.Embed(title= guildlb_msg , color=0x0066ff)
@@ -1377,6 +1376,8 @@ async def guildlbT(ctx,guildtag):
     
     members_msg0 = ""
     pager=[]
+    embed = d.Embed(title="\u200b", color=0x6600ff)
+
     for i in range(embeds_int):
         members_msg0 = ""
         loop_list = []
@@ -1386,11 +1387,11 @@ async def guildlbT(ctx,guildtag):
         
         for k in range(loop_list[i],loop_list[i+1]):
             members_msg0 = members_msg0 + rankk(k+1) + "\n" + test_list_10[k] + '\n'
-        embeds_list[i].add_field(name='\u200b', value= members_msg0 , inline=False)
+        embed.add_field(name='\u200b', value= members_msg0 , inline=False)
         members_msg0=""
-        if i == embeds_int-1:
-            embeds_list[i].set_footer(text="time taken : "+str(time_take)+" seconds.")
-        pager.append(embeds_list[i])
+        embed.set_footer(text="time taken : "+str(time_taken)+" seconds.")
+        pager.append(embed)
+        embed.clear_fields()
     paginator = DiscordUtils.Pagination.CustomEmbedPaginator(ctx)
     paginator.add_reaction('⏮️', "first")
     paginator.add_reaction('⏪', "back")
