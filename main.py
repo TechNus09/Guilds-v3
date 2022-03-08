@@ -1254,29 +1254,11 @@ async def guildlb(ctx,skill_name,guildtag):
     fields_int = embeds_int
     
 
-    embed0 = d.Embed(title="\u200b", color=0x6600ff)
-    embed1 = d.Embed(title="\u200b", color=0x6600ff)
-    embed2 = d.Embed(title="\u200b", color=0x6600ff)
-    embed3 = d.Embed(title="\u200b", color=0x6600ff)
-    embed4 = d.Embed(title="\u200b", color=0x6600ff)
-    embed5 = d.Embed(title="\u200b", color=0x6600ff)
-    embed6 = d.Embed(title="\u200b", color=0x6600ff)
-    embed7 = d.Embed(title="\u200b", color=0x6600ff)
-    embed8 = d.Embed(title="\u200b", color=0x6600ff)
-    embed9 = d.Embed(title="\u200b", color=0x6600ff)
-    embed10 = d.Embed(title="\u200b", color=0x6600ff)
-    embed11 = d.Embed(title="\u200b", color=0x6600ff)
-    embed12 = d.Embed(title="\u200b", color=0x6600ff)
-    embed13 = d.Embed(title="\u200b", color=0x6600ff)
-    embed14 = d.Embed(title="\u200b", color=0x6600ff)
-    embed15 = d.Embed(title="\u200b", color=0x6600ff)
-    embed16 = d.Embed(title="\u200b", color=0x6600ff)
-    embed17 = d.Embed(title="\u200b", color=0x6600ff)
-    embeds_list = [embed0,embed1,embed2,embed3,embed4,embed5,embed6,embed7,embed8,embed9,embed10,embed11,embed12,embed13,embed14,embed15,embed16,embed17]
-    
     members_msg0 = ""
     pager=[]
-    
+    embed = d.Embed(title="\u200b", color=0x6600ff)
+    embed_list = [embed for embed_list in range(embeds_int) )
+
     for i in range(embeds_int):
         members_msg0 = ""
         loop_list = []
@@ -1286,11 +1268,10 @@ async def guildlb(ctx,skill_name,guildtag):
         
         for k in range(loop_list[i],loop_list[i+1]):
             members_msg0 = members_msg0 + rankk(k+1) + "\n" + test_list_8[k] + '\n'
-        embeds_list[i].add_field(name='\u200b', value= members_msg0 , inline=False)
+        embed_list[i].add_field(name='\u200b', value= members_msg0 , inline=False)
         members_msg0=""
-        if i == embeds_int-1:
-            embeds_list[i].set_footer(text="time taken : "+str(cmd_time)+" seconds.")
-        pager.append(embeds_list[i])
+        embed_list[i].set_footer(text=f"({i+1}/{embeds_int})")
+    pager.append(embed_list)
     paginator = DiscordUtils.Pagination.CustomEmbedPaginator(ctx)
     paginator.add_reaction('⏮️', "first")
     paginator.add_reaction('⏪', "back")
@@ -1300,31 +1281,6 @@ async def guildlb(ctx,skill_name,guildtag):
     
     await paginator.run(pager)
     test_list_8.clear()    
-
-
-
-
-
-
-
-
-
-
-
-
-"""@bot.command()
-async def event(ctx):
-
-    await ctx.send(f"Getting Combat Grinders Leaderboard ... ")
-    results_list = []
-    results_list = CombatEvent()
-    temp_msg = ""
-    for i in range(len(results_list)-1):
-        temp_msg = temp_msg + results_list[i] + '\n'
-    await ctx.send(f"{temp_msg}")
-    temp_msg0 = "Total Guild Gained Xp"+' -- '+"{:,}".format(results_list[len(results_list)-1])
-    await ctx.send(f"{temp_msg0}")
-    results_list.clear()"""
 
 
     
@@ -1354,32 +1310,12 @@ async def guildlbT(ctx,guildtag):
     embeds_int = math.ceil(counter_int / 15)
     fields_int = embeds_int
     
-    embed0 = d.Embed(title="\u200b", color=0x6600ff)
-    embed1 = d.Embed(title="\u200b", color=0x6600ff)
-    embed2 = d.Embed(title="\u200b", color=0x6600ff)
-    embed3 = d.Embed(title="\u200b", color=0x6600ff)
-    embed4 = d.Embed(title="\u200b", color=0x6600ff)
-    embed5 = d.Embed(title="\u200b", color=0x6600ff)
-    embed6 = d.Embed(title="\u200b", color=0x6600ff)
-    embed7 = d.Embed(title="\u200b", color=0x6600ff)
-    embed8 = d.Embed(title="\u200b", color=0x6600ff)
-    embed9 = d.Embed(title="\u200b", color=0x6600ff)
-    embed10 = d.Embed(title="\u200b", color=0x6600ff)
-    embed11 = d.Embed(title="\u200b", color=0x6600ff)
-    embed12 = d.Embed(title="\u200b", color=0x6600ff)
-    embed13 = d.Embed(title="\u200b", color=0x6600ff)
-    embed14 = d.Embed(title="\u200b", color=0x6600ff)
-    embed15 = d.Embed(title="\u200b", color=0x6600ff)
-    embed16 = d.Embed(title="\u200b", color=0x6600ff)
-    embed17 = d.Embed(title="\u200b", color=0x6600ff)
-    embeds_list = [embed0,embed1,embed2,embed3,embed4,embed5,embed6,embed7,embed8,embed9,embed10,embed11,embed12,embed13,embed14,embed15,embed16,embed17]
-    
     members_msg0 = ""
     pager=[]
-    
+    embed = d.Embed(title="\u200b", color=0x6600ff)
+    embed_list = [embed for embed_list in range(embeds_int) )
     for i in range(embeds_int):
-        embed = d.Embed(title="\u200b", color=0x6600ff)
-
+        
         members_msg0 = ""
         loop_list = []
         for j in range(embeds_int):
@@ -1388,11 +1324,10 @@ async def guildlbT(ctx,guildtag):
         
         for k in range(loop_list[i],loop_list[i+1]):
             members_msg0 = members_msg0 + rankk(k+1) + "\n" + test_list_10[k] + '\n'
-        embed.add_field(name='\u200b', value= members_msg0 , inline=False)
+        embed_list[i].add_field(name='\u200b', value= members_msg0 , inline=False)
         members_msg0=""
-        embed.set_footer(text="time taken : "+str(time_taken)+" seconds.")
-        pager.append(embed)
-        #embed.clear_fields()
+        embed_list[i].set_footer(text=f"({i+1}/{embeds_int})")
+    pager = embed_list
     paginator = DiscordUtils.Pagination.CustomEmbedPaginator(ctx)
     paginator.add_reaction('⏮️', "first")
     paginator.add_reaction('⏪', "back")
@@ -1400,6 +1335,7 @@ async def guildlbT(ctx,guildtag):
     paginator.add_reaction('⏩', "next")
     paginator.add_reaction('⏭️', "last")
     await paginator.run(pager)
+    embed_list.clear()
     test_list_10.clear()                  
 
 
