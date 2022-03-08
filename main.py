@@ -1272,16 +1272,14 @@ async def guildlb(ctx,skill_name,guildtag):
         embed_list[i].add_field(name='\u200b', value= members_msg0 , inline=False)
         members_msg0=""
         embed_list[i].set_footer(text=f"({i+1}/{embeds_int})")
-        pager.append(embed_list[i])
+        
     paginator = DiscordUtils.Pagination.CustomEmbedPaginator(ctx)
     paginator.add_reaction('⏮️', "first")
     paginator.add_reaction('⏪', "back")
     paginator.add_reaction('🔐', "lock")
     paginator.add_reaction('⏩', "next")
     paginator.add_reaction('⏭️', "last")
-    #await paginator.run(embed_list)
-    for i in range(len(embed_list)):
-        await ctx.send(embed=embed_list[i])
+    await paginator.run(embed_list)
     embed_list.clear()
     test_list_8.clear()    
 
@@ -1330,7 +1328,7 @@ async def guildlbT(ctx,guildtag):
         embed_list[i].add_field(name='\u200b', value= members_msg0 , inline=False)
         members_msg0=""
         embed_list[i].set_footer(text=f"({i+1}/{embeds_int})")
-        pager.append(embed_list[i])
+        
     paginator = DiscordUtils.Pagination.CustomEmbedPaginator(ctx)
     paginator.add_reaction('⏮️', "first")
     paginator.add_reaction('⏪', "back")
