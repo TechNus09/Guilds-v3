@@ -679,7 +679,7 @@ async def searchtagtotal(guildtag):
                             else:
                                 guildreg[player_name]=xp
                                 continue
-                elif data = [] :
+                elif data == [] :
                     break
     temp_dic = {k: v for k, v in sorted(guildreg.items(), key=lambda item: item[1],reverse=True)}
     members_sorted.clear()
