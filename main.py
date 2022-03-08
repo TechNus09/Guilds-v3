@@ -1376,9 +1376,10 @@ async def guildlbT(ctx,guildtag):
     
     members_msg0 = ""
     pager=[]
-    embed = d.Embed(title="\u200b", color=0x6600ff)
-
+    
     for i in range(embeds_int):
+        embed = d.Embed(title="\u200b", color=0x6600ff)
+
         members_msg0 = ""
         loop_list = []
         for j in range(embeds_int):
@@ -1391,7 +1392,7 @@ async def guildlbT(ctx,guildtag):
         members_msg0=""
         embed.set_footer(text="time taken : "+str(time_taken)+" seconds.")
         pager.append(embed)
-        embed.clear_fields()
+        #embed.clear_fields()
     paginator = DiscordUtils.Pagination.CustomEmbedPaginator(ctx)
     paginator.add_reaction('⏮️', "first")
     paginator.add_reaction('⏪', "back")
