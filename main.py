@@ -444,19 +444,22 @@ async def search(skill_name):
         responses = await asyncio.gather(*to_do)
         for response in responses:
             fdata = await response.json()
-            for i in range(0,20): 
-                #check names get rank
-                player_name = fdata[i]["name"]
-                xp = fdata[i]["xp"]
-                tag = player_name.split()[0]
-                tag = tag.upper()
+            if fdata != [] :
+                for i in range(0,20): 
+                    #check names get rank
+                    player_name = fdata[i]["name"]
+                    xp = fdata[i]["xp"]
+                    tag = player_name.split()[0]
+                    tag = tag.upper()
                 
-                if tag in d_test :
-                    d_test[tag] += xp
-                elif "Immortal" in player_name :
-                    d_test["IMMORTAL"] += xp
-                else :                
-                    continue
+                    if tag in d_test :
+                        d_test[tag] += xp
+                    elif "Immortal" in player_name :
+                        d_test["IMMORTAL"] += xp
+                    else :                
+                        continue
+            elif fdata ==[] :
+                break
             
     temp_guilds = {k: v for k, v in sorted(d_test.items(), key=lambda item: item[1],reverse=True)}
     
@@ -545,22 +548,25 @@ async def LeaderBoard():
             to_do = get_tasks(session,skill_name)
             responses = await asyncio.gather(*to_do)
             for response in responses:
-                fdata = await response.json()
-                for i in range(0,20): 
-                    player_name = fdata[i]["name"]
-                    xp = fdata[i]["xp"]
-                    tag = player_name.split()[0]
-                    tag = tag.upper()
-                    n = player_name.lower()
-                    
-                    if tag in skills_dict_list[m] :
-                        skills_dict_list[m][tag] += xp
-                        all_xp[tag] += xp
-                    elif "immortal" in n :
-                        skills_dict_list[m]["IMMORTAL"] += xp
-                        all_xp["IMMORTAL"] += xp
-                    else :                
-                        continue
+                fdata = await responscontinue
+                if fdata != [] :
+                    for i in range(0,20): 
+                        player_name = fdata[i]["name"]
+                        xp = fdata[i]["xp"]
+                        tag = player_name.split()[0]
+                        tag = tag.upper()
+                        n = player_name.lower()
+                        
+                        if tag in skills_dict_list[m] :
+                            skills_dict_list[m][tag] += xp
+                            all_xp[tag] += xp
+                        elif "immortal" in n :
+                            skills_dict_list[m]["IMMORTAL"] += xp
+                            all_xp["IMMORTAL"] += xp
+                        else :                
+                            continue
+                elif fdata == []:
+                    break
         m +=1
         
     for j in range(0,10):
@@ -785,7 +791,7 @@ async def show(ctx):
 
 
 
-@bot.command(name='melee',aliases=['melee','sw','silent'])
+@bot.command(name='melee',aliases=['sw','silent'])
 async def melee(ctx,rank="25"):
     if ((int(rank)<=0) or (int(rank)>25)):
         await ctx.send("Ranks must be between 1 and 25")
@@ -797,6 +803,24 @@ async def melee(ctx,rank="25"):
         time_taken = a[1]
         cmd_time = int(time_taken) 
         embedVar1 = d.Embed(title="Top Guilds: Melee (60,000)", color=0x669999)
+        for i in range(int(rank)):
+            embedVar1.add_field(name=rankk(i+1), value= test_list_1[i] , inline=False)
+        embedVar1.set_footer(text="time taken : "+str(cmd_time)+" seconds.")
+        await ctx.send(embed=embedVar1)
+        test_list_1.clear()
+
+@bot.command(name='magic',aliases=['staff'])
+async def magic(ctx,rank="25"):
+    if ((int(rank)<=0) or (int(rank)>25)):
+        await ctx.send("Ranks must be between 1 and 25")
+    else:
+        await ctx.send("Fetching Magic Data ... ")
+        magiclb_srch = search("-magic")
+        a = asyncio.run(magiclb_srch)
+        test_list_1 = a[0]
+        time_taken = a[1]
+        cmd_time = int(time_taken) 
+        embedVar1 = d.Embed(title="Top Guilds: Magic (60,000)", color=0x669999)
         for i in range(int(rank)):
             embedVar1.add_field(name=rankk(i+1), value= test_list_1[i] , inline=False)
         embedVar1.set_footer(text="time taken : "+str(cmd_time)+" seconds.")
@@ -910,6 +934,25 @@ async def cooking(ctx,rank="25"):
         embedVar7.set_footer(text="time taken : "+str(cmd_time)+" seconds.")
         await ctx.send(embed=embedVar7)
         test_list_7.clear()
+
+@bot.command(name='tailoring',aliases=['tailor','yarny'])
+async def tailoring(ctx,rank="25"):
+    if ((int(rank)<=0) or (int(rank)>25)):
+        await ctx.send("Ranks must be between 1 and 25")
+    else:
+        await ctx.send("Fetching Tailoring Data ... ")
+        tailorlb_srch = search("-tailoring")
+        a = asyncio.run(tailorlb_srch)
+        test_list_1 = a[0]
+        time_taken = a[1]
+        cmd_time = int(time_taken) 
+        embedVar1 = d.Embed(title="Top Guilds: Tailoring (60,000)", color=0x669999)
+        for i in range(int(rank)):
+            embedVar1.add_field(name=rankk(i+1), value= test_list_1[i] , inline=False)
+        embedVar1.set_footer(text="time taken : "+str(cmd_time)+" seconds.")
+        await ctx.send(embed=embedVar1)
+        test_list_1.clear()
+
 
 @bot.command(name='total',aliases=['totalxp'])
 async def total(ctx,rank='25'):
