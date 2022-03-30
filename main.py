@@ -326,7 +326,7 @@ async def set_init():
             for response in responses:
                 fdata = await response.json()
                 for i in range(0,20):
-                    member_templete={'member_name':'name_expml' ,'melee_xp':0 ,'magic_xp':0 ,'mining_xp':0 ,'smithing_xp':0 ,'woodcutting_xp':0 ,'crafting_xp':0 ,'fishing_xp':0 ,'cooking_xp':0 ,'tailoring_xp':0} }
+                    member_templete={'member_name':'name_expml' ,'melee_xp':0 ,'magic_xp':0 ,'mining_xp':0 ,'smithing_xp':0 ,'woodcutting_xp':0 ,'crafting_xp':0 ,'fishing_xp':0 ,'cooking_xp':0 ,'tailoring_xp':0 }
                     player_name = fdata[i]["name"]
                     xp = fdata[i]["xp"]
                     tag = player_name.split()[0]
