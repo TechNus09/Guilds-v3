@@ -22,7 +22,7 @@ nest_asyncio.apply()
 
 ##############################################################################Bot_Resources######################################################################################
 
-skill = ['','-magic','-mining', '-smithing', '-woodcutting', '-crafting', '-fishing', '-cooking','-tailoring']
+skill = ['-melee','-magic','-mining', '-smithing', '-woodcutting', '-crafting', '-fishing', '-cooking','-tailoring']
 skills = ['melee','magic','mining', 'smithing', 'woodcutting', 'crafting', 'fishing', 'cooking','tailoring','total']
 
 guilds_melee = {}
@@ -240,7 +240,7 @@ async def makelog(guild_tag) :
     name_list = []
     
     c_xp = ['combat_xp','magic_xp','mining_xp','smithing_xp','woodcutting_xp','crafting_xp','fishing_xp','cooking_xp','tailoring_xp']
-    c_skill =['','-magic','-mining','-smithing','-woodcutting','-crafting','-fishing','-cooking','-tailoring']
+    c_skill =['-melee','-magic','-mining','-smithing','-woodcutting','-crafting','-fishing','-cooking','-tailoring']
     
     for skill_x in range(9):
         #connector = aiohttp.TCPConnector(limit=80)
@@ -697,7 +697,7 @@ async def getlist(ctx):
 
 
 @bot.command()
-async def log(ctx,guild_tag):
+async def log(ctx,guild_tag="owo"):
     m1 = await ctx.send(f"logging {guild_tag.upper()} members xp ... ")
     if os.path.exists("data.json"):
         os.remove("data.json")
@@ -853,7 +853,7 @@ async def melee(ctx,rank="25"):
         await ctx.send("Ranks must be between 1 and 25")
     else:
         await ctx.send("Fetching Melee Data ... ")
-        meleelb_srch = search("")
+        meleelb_srch = search("-melee")
         a = asyncio.run(meleelb_srch)
         test_list_1 = a[0]
         time_taken = a[1]
