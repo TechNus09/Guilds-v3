@@ -703,7 +703,7 @@ async def log(ctx,guild_tag="owo"):
         os.remove("data.json")
     
     record = asyncio.run(makelog(guild_tag))
-    create = crt(record[0])
+    create = crt(record)
    
     if create :
         await m1.delete()
