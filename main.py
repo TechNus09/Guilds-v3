@@ -235,6 +235,41 @@ async def competition(skill_name) :
     return mini_list, total_time, total_xp
 
 
+async def makelog(guild_tag) :
+    event_log = {}
+    name_list = []
+    
+    c_xp = ['combat_xp','magic_xp','mining_xp','smithing_xp','woodcutting_xp','crafting_xp','fishing_xp','cooking_xp','tailoring_xp']
+    c_skill =['','-magic','-mining','-smithing','-woodcutting','-crafting','-fishing','-cooking','-tailoring']
+    
+    for skill_x in range(9):
+        #connector = aiohttp.TCPConnector(limit=80)
+        async with aiohttp.ClientSession() as session :
+            to_do = get_tasks(session, c_skill[skill_x])
+            responses = await asyncio.gather(*to_do)
+            for response in responses:
+                data = await response.json()
+                for fdata in data:
+                    member_temp = { 'ign' : 'name' , 'combat_xp' : 0 , 'mining_xp' : 0 , 'smithing_xp' : 0 , 'woodcutting_xp': 0 , 'crafting_xp' : 0 , 'fishing_xp' : 0 , 'cooking_xp' : 0 , 'total': 0}
+                    player_name = fdata["name"]
+                    xp = fdata["xp"]
+                    tag = player_name.split()[0]                    
+                    if tag.upper() == guild_tag.upper():
+                        if player_name in name_list:
+                            event_log[player_name][c_xp[skill_x]]=xp
+                            event_log[player_name]["total"] += xp
+                        else:
+                            name_list.append(player_name)
+                            event_log[player_name]=member_temp
+                            event_log[player_name]["ign"] = player_name
+                            event_log[player_name][c_xp[skill_x]]=xp
+                            event_log[player_name]["total"] += xp
+    return event_log
+
+def crt(data):
+    log_file = open("data.json", "w")
+    log_file = json.dump(data, log_file, indent = 4)
+    return True
 
 ######################################################################Bot_Funtctions##################################################################################        
         
@@ -663,7 +698,7 @@ async def getlist(ctx):
 
 @bot.command()
 async def log(ctx,guild_tag):
-    m1 = await ctx.send("logging members xp ... ")
+    m1 = await ctx.send(f"logging {guild_tag.upper()} members xp ... ")
     if os.path.exists("data.json"):
         os.remove("data.json")
     
