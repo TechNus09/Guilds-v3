@@ -660,6 +660,27 @@ async def getlist(ctx):
         await ctx.send(members_xp_list[i])
     await ctx.send(f'time taken {time_taken}')
 
+
+@bot.command()
+async def log(ctx,guild_tag):
+    m1 = await ctx.send("logging members xp ... ")
+    if os.path.exists("data.json"):
+        os.remove("data.json")
+    
+    record = asyncio.run(makelog(guild_tag))
+    create = crt(record[0])
+   
+    if create :
+        await m1.delete()
+        m2 = await ctx.send("logging finished \nsending log file ...")
+        await m2.delete()
+        await ctx.channel.send('collected data!', file=d.File("data.json"))
+    else:
+        await m1.delete()
+        await ctx.send("logging failed")
+    
+
+
 #########
 @bot.command()
 async def comp(ctx,skill_name = 'total'):
